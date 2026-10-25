@@ -1,0 +1,1 @@
+# sensorica_blueprint
