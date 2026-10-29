@@ -1,0 +1,21 @@
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+.clang_complete
+.gcc-flags.json
+platformio.ini.local
+.pio-mcp-workspace/
+
+# Secrets and credentials
+secrets.h
+firmware/include/secrets.h
+*.env
+*.local
+
+# IDE and OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
