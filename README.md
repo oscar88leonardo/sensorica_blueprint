@@ -75,3 +75,16 @@ sensorica_blueprint/
 3. El firmware cargará automáticamente el binario compilado en `.pio/build/esp32dev/firmware.bin`.
 4. El ESP32 se conecta a la red `Wokwi-GUEST` y a la instancia de Nodrix en Cloudflare.
 5. Cada 10 segundos, el firmware lee los 3 potenciómetros y envía el lote de métricas (`temperatura`, `humedad`, `iluminacion`) hacia `POST /v1/telemetry`, confirmando con respuesta HTTP `204`.
+
+---
+
+## Dashboard en Tiempo Real (Etapa 3)
+
+El dashboard fue generado a través del servidor Nodrix MCP:
+- **Nombre:** Monitoreo de Sensores
+- **ID:** `dsh_9oOUFs5IEnsH`
+- **Widgets configurados:**
+  - 3 × Tarjetas de valor numérico con unidades (`°C`, `% HR`, `lx`).
+  - 3 × Diales analógicos (*gauges*) con rangos nominales.
+  - 1 × Gráfico temporal de 3 series con ventana de 1 hora y zoom interactivo.
+- Exportación local: [`dashboard/monitoreo_sensores.json`](file:///home/leonard0/eCodes/sensorica_blueprint/dashboard/monitoreo_sensores.json).

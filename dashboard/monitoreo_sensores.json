@@ -1,0 +1,129 @@
+{
+  "id": "dsh_9oOUFs5IEnsH",
+  "name": "Monitoreo de Sensores",
+  "description": null,
+  "layout": {
+    "grid": {
+      "columns": 16
+    },
+    "items": [
+      {
+        "id": "wid_Dr2xLXvzSZzA",
+        "type": "iot-value",
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 2,
+        "props": {
+          "title": "Temperatura",
+          "unit": "°C",
+          "variable": "temperatura"
+        }
+      },
+      {
+        "id": "wid_Q4Clm23L0iw6",
+        "type": "iot-value",
+        "x": 5,
+        "y": 0,
+        "w": 6,
+        "h": 2,
+        "props": {
+          "title": "Humedad Relativa",
+          "unit": "% HR",
+          "variable": "humedad"
+        }
+      },
+      {
+        "id": "wid_z4Mp3JJ-Hxm2",
+        "type": "iot-value",
+        "x": 11,
+        "y": 0,
+        "w": 5,
+        "h": 2,
+        "props": {
+          "title": "Iluminación",
+          "unit": "lx",
+          "variable": "iluminacion"
+        }
+      },
+      {
+        "id": "wid_zYPhsLLTmH6Z",
+        "type": "iot-gauge",
+        "x": 0,
+        "y": 2,
+        "w": 5,
+        "h": 4,
+        "props": {
+          "max": 100,
+          "min": 0,
+          "title": "Temperatura (°C)",
+          "variable": "temperatura"
+        }
+      },
+      {
+        "id": "wid_3j4U5BKHiLtv",
+        "type": "iot-gauge",
+        "x": 5,
+        "y": 2,
+        "w": 6,
+        "h": 4,
+        "props": {
+          "max": 100,
+          "min": 0,
+          "title": "Humedad (% HR)",
+          "variable": "humedad"
+        }
+      },
+      {
+        "id": "wid_Sm2kYJ41EnXS",
+        "type": "iot-gauge",
+        "x": 11,
+        "y": 2,
+        "w": 5,
+        "h": 4,
+        "props": {
+          "max": 1000,
+          "min": 0,
+          "title": "Iluminación (lx)",
+          "variable": "iluminacion"
+        }
+      },
+      {
+        "id": "wid_Ov2M8Hn9cPCi",
+        "type": "iot-chart",
+        "x": 0,
+        "y": 6,
+        "w": 16,
+        "h": 6,
+        "props": {
+          "chartType": "line",
+          "series": [
+            {
+              "color": "#ef4444",
+              "label": "Temperatura (°C)",
+              "variable": "temperatura"
+            },
+            {
+              "color": "#3b82f6",
+              "label": "Humedad (% HR)",
+              "variable": "humedad"
+            },
+            {
+              "color": "#f59e0b",
+              "label": "Iluminación (lx)",
+              "variable": "iluminacion"
+            }
+          ],
+          "title": "Histórico de Sensores (Última Hora)",
+          "window": "1h",
+          "zoom": true
+        }
+      }
+    ]
+  },
+  "visibility": "private",
+  "share_token": null,
+  "created_at": 1793285955,
+  "updated_at": 1793286435,
+  "archived_at": null
+}
