@@ -15,13 +15,10 @@ constexpr uint8_t PIN_LUX  = 32; // CH2: GPIO32
 // ==========================================
 // Temporización y Comunicación
 // ==========================================
-constexpr unsigned long TELEMETRY_INTERVAL_MS = 10000; // Publicación cada 10 s
-constexpr unsigned long SERIAL_BAUD_RATE      = 115200;
-
-// Modo de transporte Nodrix:
-// false = HTTPS periódico (beginHTTP) - Recomendado y robusto en Wokwi
-// true  = WebSocket bidireccional continuo (begin)
-constexpr bool USE_WEBSOCKET_MODE = false;
+constexpr unsigned long TELEMETRY_INTERVAL_MS   = 1000;  // Publicación cada 1 s (modo pruebas cortas)
+constexpr unsigned long SERIAL_BAUD_RATE        = 115200;
+constexpr uint16_t      HTTP_TIMEOUT_MS         = 15000; // Timeout de lectura HTTP (ms)
+constexpr uint32_t      TLS_HANDSHAKE_TIMEOUT_S = 30;    // Timeout de handshake TLS (s)
 
 // ==========================================
 // Rangos Físicos de Escalado (ADC 12-bit: 0-4095)

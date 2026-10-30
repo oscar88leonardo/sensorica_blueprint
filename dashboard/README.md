@@ -11,7 +11,7 @@ Este directorio contiene la definición exportada del dashboard creado en la nub
 - **Nombre:** Monitoreo de Sensores
 - **Acceso:** Inicia sesión en tu instancia de Cloudflare Workers:  
   `https://nodrixapp.oscar88leonardo-351.workers.dev` y selecciona el proyecto `sensorica-blueprint`.
-
+- **Acceso Publico:** https://nodrixapp.oscar88leonardo-351.workers.dev/share/zbEBe-cFM4Vb 
 ---
 
 ## Disposición de Widgets (Grid de 16 Columnas)
