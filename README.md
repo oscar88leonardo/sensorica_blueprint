@@ -98,7 +98,14 @@ Edita `firmware/include/secrets.h` con los datos de tu entorno:
 #define WIFI_PASS    ""                                  // Sin contraseña en Wokwi-GUEST
 #define NODRIX_HOST  "tu-instancia.workers.dev"          // Host de tu Worker en Cloudflare (sin https:// ni /)
 #define NODRIX_TOKEN "pega_aqui_tu_project_token"        // Token del proyecto generado en Nodrix
+
+// (Opcional - Solo producción en hardware físico)
+// #define NODRIX_CA_CERT "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n"
 ```
+
+> **Nota sobre Seguridad TLS (`NODRIX_CA_CERT` vs `setInsecure`):**
+> - **En simulación (Wokwi) y prototipado:** Si `NODRIX_CA_CERT` no está definido, el firmware invoca `Nodrix.setInsecure()`. El tráfico sigue viajando **cifrado mediante TLS**, pero se omite la verificación de la cadena X.509 de la Autoridad Certificadora (CA). Esto evita fallos por falta de sincronización de reloj NTP al arranque (`1970-01-01`), reduce la carga de cómputo en el simulador y tolera la rotación automática de certificados de borde en Cloudflare.
+> - **En producción (ESP32 físico):** Para proteger el `NODRIX_TOKEN` frente a ataques *Man-in-the-Middle (MITM)* en redes WiFi reales, define `NODRIX_CA_CERT` en `secrets.h` con el certificado PEM de la Root CA que firma tu dominio en Cloudflare (por ejemplo, `ISRG Root X1` o `GTS Root R1`, consultable con `openssl s_client -showcerts -connect <tu-instancia>.workers.dev:443 </dev/null`). Al detectarlo, [`telemetry_init()`](firmware/src/telemetry.cpp) activará automáticamente `Nodrix.setCACert(NODRIX_CA_CERT)`.
 
 *(Opcional)* En [`firmware/include/config.h`](firmware/include/config.h) puedes ajustar `TELEMETRY_INTERVAL_MS` según tu caso de uso (por ejemplo `1000` ms para pruebas cortas interactivas o `10000` ms para operación continua cuidando la cuota gratuita de Cloudflare).
 
