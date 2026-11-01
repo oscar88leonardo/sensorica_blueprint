@@ -1,0 +1,13 @@
+{
+  "projectRoot": "/home/leonard0/eCodes/sensorica_blueprint",
+  "batchFiles": [
+    {"path": "docs/acondicionamiento.md", "language": "markdown", "sizeLines": 85, "fileCategory": "docs"},
+    {"path": "docs/implementation_plan.md", "language": "markdown", "sizeLines": 199, "fileCategory": "docs"},
+    {"path": "docs/plan.md", "language": "markdown", "sizeLines": 199, "fileCategory": "docs"}
+  ],
+  "batchImportData": {
+    "docs/acondicionamiento.md": [],
+    "docs/implementation_plan.md": [],
+    "docs/plan.md": []
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "id": "config:firmware/diagram.json",
+      "type": "config",
+      "name": "diagram.json",
+      "filePath": "firmware/diagram.json",
+      "summary": "Wokwi electronic circuit schematic defining the ESP32 DevKitC and 3 potentiometers connected to ADC1 pins GPIO34, 35, and 32.",
+      "tags": [
+        "simulation",
+        "circuit",
+        "schematic",
+        "wokwi",
+        "hardware"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:firmware/platformio.ini",
+      "type": "config",
+      "name": "platformio.ini",
+      "filePath": "firmware/platformio.ini",
+      "summary": "PlatformIO project configuration specifying esp32dev board, Arduino framework, baud rates, and library dependencies including Nodrix.",
+      "tags": [
+        "configuration",
+        "platformio",
+        "build-system",
+        "embedded"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:firmware/wokwi.toml",
+      "type": "config",
+      "name": "wokwi.toml",
+      "filePath": "firmware/wokwi.toml",
+      "summary": "Wokwi simulation configuration file specifying the compiled firmware binary and ELF paths for debugging.",
+      "tags": [
+        "simulation",
+        "configuration",
+        "wokwi"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:firmware/wokwi.toml",
+      "target": "config:firmware/diagram.json",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:firmware/wokwi.toml",
+      "target": "config:firmware/platformio.ini",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

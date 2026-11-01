@@ -1,0 +1,80 @@
+[
+  {
+    "order": 1,
+    "title": "Architecture & Project Overview",
+    "description": "Start with README.md to understand the complete sensorica_blueprint system architecture spanning simulated sensing, ESP32 ADC digitization, and Cloudflare Nodrix cloud telemetry with Root CA verification. It details the end-to-end data pipeline, repository structure, and physical channel mapping.",
+    "nodeIds": [
+      "document:README.md"
+    ],
+    "languageLesson": "Markdown documents with embedded Mermaid diagrams allow architectural blueprints to evolve synchronously with code in version control."
+  },
+  {
+    "order": 2,
+    "title": "Signal Conditioning & Circuit Setup",
+    "description": "Before reading firmware code, understand how hardware signals are acquired and simulated. These files document analog front-end conditioning constraints—explaining why ESP32 ADC1 is strictly chosen over ADC2 to coexist with WiFi—and map virtual potentiometers to GPIOs in the Wokwi circuit layout.",
+    "nodeIds": [
+      "document:docs/acondicionamiento.md",
+      "config:firmware/diagram.json"
+    ],
+    "languageLesson": "Wokwi diagram.json declarations model breadboard wiring, component part numbers, and pin connections for deterministic simulation without physical lab hardware."
+  },
+  {
+    "order": 3,
+    "title": "Build Configuration & Emulation",
+    "description": "Connecting the circuit simulation to compilation, these configuration files define the PlatformIO build environment and Wokwi runtime bridge. They specify the Espressif 32 platform, Arduino framework, upload speed, and the compiled binary targets executed in the emulator.",
+    "nodeIds": [
+      "config:firmware/platformio.ini",
+      "config:firmware/wokwi.toml"
+    ],
+    "languageLesson": "PlatformIO uses INI-formatted platformio.ini files to isolate target microcontrollers, framework versions, and external library dependencies."
+  },
+  {
+    "order": 4,
+    "title": "Firmware Parameters & Credentials",
+    "description": "Building on the hardware definitions from Step 2, config.h defines ADC1 pin constants, actuator pins, physical magnitude conversion boundaries, and telemetry dispatch intervals. The secrets template provides secure placeholders for WiFi credentials, Nodrix Cloudflare endpoints, and Root CA certificate pinning.",
+    "nodeIds": [
+      "file:firmware/include/config.h",
+      "file:firmware/include/secrets.h.example"
+    ],
+    "languageLesson": "Header guards (#ifndef / #define) prevent duplicate symbol declarations in C/C++, while .example template files prevent accidental commits of production secrets."
+  },
+  {
+    "order": 5,
+    "title": "ADC Acquisition & Conversion",
+    "description": "This core module implements the 12-bit ADC digitization, linear scaling, and per-sample sanity validation logic defined in config.h. It declares the SensorReading and SensorData structures, providing clean, strongly typed representations of temperature, humidity, and illumination with error flags.",
+    "nodeIds": [
+      "file:firmware/src/sensors.h",
+      "file:firmware/src/sensors.cpp"
+    ],
+    "languageLesson": "C++ structs encapsulate multi-channel sensor readings into cohesive data objects, separating hardware acquisition logic from networking code."
+  },
+  {
+    "order": 6,
+    "title": "Network Transport & Telemetry",
+    "description": "With sensor readings structured in Step 5, the telemetry subsystem manages WiFi connectivity and cloud delivery via the Nodrix SDK. It uses fast channel-6 AP association for Wokwi, drives non-blocking WebSockets, validates sensor metrics individually, and supports TLS Root CA pinning.",
+    "nodeIds": [
+      "file:firmware/src/telemetry.h",
+      "file:firmware/src/telemetry.cpp"
+    ],
+    "languageLesson": "Using official SDKs with persistent WebSocket connections eliminates repeated TLS handshakes, reducing CPU cycles and memory overhead on resource-constrained microcontrollers."
+  },
+  {
+    "order": 7,
+    "title": "Main Firmware Application Loop",
+    "description": "The main entry point ties together sensor sampling from Step 5 and telemetry dispatch from Step 6. Operating inside Arduino's setup and loop lifecycle, it initializes hardware, periodically captures sensor data, drives the non-blocking Nodrix loop, and recovers gracefully from transient link drops.",
+    "nodeIds": [
+      "file:firmware/src/main.cpp"
+    ],
+    "languageLesson": "Non-blocking time comparisons using millis() allow embedded applications to schedule periodic tasks without halting CPU execution via delay()."
+  },
+  {
+    "order": 8,
+    "title": "Real-Time Telemetry Dashboard",
+    "description": "Completing the end-to-end architecture introduced in Step 1, this step covers the Cloudflare Nodrix visualization dashboard. It specifies widget coordinates, historical time-series charts, and gauge monitors bound to the sensor variables emitted by the ESP32 firmware.",
+    "nodeIds": [
+      "document:dashboard/README.md",
+      "config:dashboard/monitoreo_sensores.json"
+    ],
+    "languageLesson": "Declarative JSON layouts define frontend widget geometries and API data mappings cleanly separated from presentation rendering logic."
+  }
+]

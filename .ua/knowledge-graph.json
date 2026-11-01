@@ -3,30 +3,188 @@
   "project": {
     "name": "sensorica_blueprint",
     "languages": [
-      "c",
       "cpp",
-      "json",
+      "c",
       "markdown",
-      "toml"
+      "json",
+      "toml",
+      "config"
     ],
     "frameworks": [
-      "Arduino",
-      "PlatformIO",
-      "ESP32",
-      "Nodrix",
-      "ArduinoJson"
+      "arduino",
+      "platformio",
+      "wokwi",
+      "nodrix"
     ],
-    "description": "End-to-end sensing, digitization, and IoT telemetry architecture for ESP32 with PlatformIO, Wokwi simulation, and Cloudflare/Nodrix integration.",
-    "analyzedAt": "2026-10-31T17:14:03.280Z",
-    "gitCommitHash": "a5f0b1ab39b701dcadd7793a6057abfc8165c69a"
+    "description": "End-to-end IoT sensor acquisition, digitization, and cloud telemetry pipeline using ESP32, Wokwi simulation, and Cloudflare Nodrix.",
+    "analyzedAt": "2026-11-01T18:38:50.811Z",
+    "gitCommitHash": "85d0370099b217642f4b584e15904822c3e12ffe"
   },
   "nodes": [
+    {
+      "id": "document:docs/acondicionamiento.md",
+      "type": "document",
+      "name": "acondicionamiento.md",
+      "filePath": "docs/acondicionamiento.md",
+      "summary": "Technical documentation explaining sensor signal conditioning, ESP32 ADC1 constraints, virtual potentiometer simulation in Wokwi, and analog front-end design for physical sensors.",
+      "tags": [
+        "documentation",
+        "sensor-conditioning",
+        "adc",
+        "hardware-design",
+        "simulation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/implementation_plan.md",
+      "type": "document",
+      "name": "implementation_plan.md",
+      "filePath": "docs/implementation_plan.md",
+      "summary": "Step-by-step implementation guide covering Wokwi simulation, ESP32 firmware acquisition, Cloudflare Nodrix backend deployment, and MCP-driven telemetry dashboard setup.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "roadmap",
+        "telemetry",
+        "dashboard"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/plan.md",
+      "type": "document",
+      "name": "plan.md",
+      "filePath": "docs/plan.md",
+      "summary": "Master project plan describing architectural decisions, hardware/simulation configurations, and milestone verification from sensor acquisition to cloud dashboard.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "roadmap",
+        "project-plan"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:firmware/diagram.json",
+      "type": "config",
+      "name": "diagram.json",
+      "filePath": "firmware/diagram.json",
+      "summary": "Wokwi electronic circuit schematic defining the ESP32 DevKitC and 3 potentiometers connected to ADC1 pins GPIO34, 35, and 32.",
+      "tags": [
+        "simulation",
+        "circuit",
+        "schematic",
+        "wokwi",
+        "hardware"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:firmware/platformio.ini",
+      "type": "config",
+      "name": "platformio.ini",
+      "filePath": "firmware/platformio.ini",
+      "summary": "PlatformIO project configuration specifying esp32dev board, Arduino framework, baud rates, and library dependencies including Nodrix.",
+      "tags": [
+        "configuration",
+        "platformio",
+        "build-system",
+        "embedded"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:firmware/wokwi.toml",
+      "type": "config",
+      "name": "wokwi.toml",
+      "filePath": "firmware/wokwi.toml",
+      "summary": "Wokwi simulation configuration file specifying the compiled firmware binary and ELF paths for debugging.",
+      "tags": [
+        "simulation",
+        "configuration",
+        "wokwi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Master architectural documentation and guide covering sensor signal acquisition, ESP32 ADC1 digitization, Wokwi simulation, Nodrix IoT telemetry, and TLS Root CA pinning.",
+      "tags": [
+        "documentation",
+        "entry-point",
+        "architecture",
+        "overview",
+        "nodrix"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:dashboard/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "dashboard/README.md",
+      "summary": "Documentation explaining the Nodrix IoT real-time monitoring dashboard layout, widget schemas, and MCP creation workflow.",
+      "tags": [
+        "documentation",
+        "dashboard",
+        "iot",
+        "nodrix",
+        "widgets"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:dashboard/monitoreo_sensores.json",
+      "type": "config",
+      "name": "monitoreo_sensores.json",
+      "filePath": "dashboard/monitoreo_sensores.json",
+      "summary": "Exported JSON schema defining the Nodrix dashboard with cards, analog gauges, and multi-series charts for temperature, humidity, and light.",
+      "tags": [
+        "configuration",
+        "dashboard",
+        "widgets",
+        "json"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:firmware/include/config.h",
+      "type": "file",
+      "name": "config.h",
+      "filePath": "firmware/include/config.h",
+      "summary": "Hardware and timing configuration header defining ADC1 input pins (GPIO 34, 35, 32), actuator pin, scaling ranges, and telemetry interval.",
+      "tags": [
+        "configuration",
+        "hardware",
+        "pinout",
+        "constants"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:firmware/include/secrets.h.example",
+      "type": "file",
+      "name": "secrets.h.example",
+      "filePath": "firmware/include/secrets.h.example",
+      "summary": "Template configuration file defining placeholders for WiFi credentials, Nodrix Cloudflare Worker hostname, project authentication tokens, and optional Root CA certificate.",
+      "tags": [
+        "configuration",
+        "secrets",
+        "template",
+        "security"
+      ],
+      "complexity": "simple"
+    },
     {
       "id": "file:firmware/src/main.cpp",
       "type": "file",
       "name": "main.cpp",
       "filePath": "firmware/src/main.cpp",
-      "summary": "Main firmware entry point initializing ADC sensors and IoT telemetry, executing the periodic sampling and publishing loop.",
+      "summary": "Main firmware entry point initializing ADC sensors and IoT telemetry, executing the periodic sampling and non-blocking publishing loop.",
       "tags": [
         "entry-point",
         "firmware",
@@ -60,9 +218,9 @@
       "filePath": "firmware/src/main.cpp",
       "lineRange": [
         29,
-        53
+        59
       ],
-      "summary": "Executes network maintenance and periodically polls ADC sensor readings to publish telemetry to the cloud.",
+      "summary": "Drives the non-blocking network loop and periodically polls ADC sensor readings to publish telemetry to Nodrix.",
       "tags": [
         "event-loop",
         "polling",
@@ -71,285 +229,11 @@
       "complexity": "simple"
     },
     {
-      "id": "file:firmware/src/telemetry.h",
-      "type": "file",
-      "name": "telemetry.h",
-      "filePath": "firmware/src/telemetry.h",
-      "summary": "Header defining public telemetry interface functions for WiFi initialization, network maintenance, and sensor data dispatch.",
-      "tags": [
-        "header",
-        "api-definition",
-        "telemetry"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "file:firmware/src/telemetry.cpp",
-      "type": "file",
-      "name": "telemetry.cpp",
-      "filePath": "firmware/src/telemetry.cpp",
-      "summary": "Implements HTTPS telemetry communication using persistent TLS keep-alive connections to publish serialized sensor JSON payloads.",
-      "tags": [
-        "telemetry",
-        "networking",
-        "https",
-        "serialization"
-      ],
-      "complexity": "moderate",
-      "languageNotes": "Uses persistent WiFiClientSecure and HTTPClient with TLS session reuse and ArduinoJson payload serialization."
-    },
-    {
-      "id": "function:firmware/src/telemetry.cpp:connect_wifi_fast",
-      "type": "function",
-      "name": "connect_wifi_fast",
-      "filePath": "firmware/src/telemetry.cpp",
-      "lineRange": [
-        29,
-        55
-      ],
-      "summary": "Connects to the WiFi access point with an optimized channel scan for Wokwi-GUEST and fallback for standard networks.",
-      "tags": [
-        "networking",
-        "wifi",
-        "utility"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:firmware/src/telemetry.cpp:telemetry_init",
-      "type": "function",
-      "name": "telemetry_init",
-      "filePath": "firmware/src/telemetry.cpp",
-      "lineRange": [
-        57,
-        88
-      ],
-      "summary": "Configures persistent TLS client options, sets HTTP headers, and initiates the initial WiFi network connection.",
-      "tags": [
-        "initialization",
-        "telemetry",
-        "tls"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:firmware/src/telemetry.cpp:telemetry_run",
-      "type": "function",
-      "name": "telemetry_run",
-      "filePath": "firmware/src/telemetry.cpp",
-      "lineRange": [
-        90,
-        104
-      ],
-      "summary": "Monitors WiFi connectivity status and attempts reconnection at 5-second intervals if disconnected.",
-      "tags": [
-        "networking",
-        "event-loop",
-        "reconnection"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:firmware/src/telemetry.cpp:telemetry_is_connected",
-      "type": "function",
-      "name": "telemetry_is_connected",
-      "filePath": "firmware/src/telemetry.cpp",
-      "lineRange": [
-        106,
-        108
-      ],
-      "summary": "Checks whether the ESP32 WiFi station interface is currently connected to an access point.",
-      "tags": [
-        "status-check",
-        "wifi",
-        "query"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:firmware/src/telemetry.cpp:telemetry_publish",
-      "type": "function",
-      "name": "telemetry_publish",
-      "filePath": "firmware/src/telemetry.cpp",
-      "lineRange": [
-        110,
-        160
-      ],
-      "summary": "Serializes sensor data to JSON and transmits an HTTPS POST request over a persistent TLS connection.",
-      "tags": [
-        "telemetry",
-        "https",
-        "serialization",
-        "post"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "document:docs/acondicionamiento.md",
-      "type": "document",
-      "name": "acondicionamiento.md",
-      "filePath": "docs/acondicionamiento.md",
-      "summary": "Technical documentation explaining sensor signal conditioning, ESP32 ADC1 constraints, virtual potentiometer simulation in Wokwi, and analog front-end design for real sensors.",
-      "tags": [
-        "documentation",
-        "sensor-conditioning",
-        "adc",
-        "hardware-design",
-        "simulation"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "document:docs/implementation_plan.md",
-      "type": "document",
-      "name": "implementation_plan.md",
-      "filePath": "docs/implementation_plan.md",
-      "summary": "Step-by-step implementation guide covering Wokwi simulation, ESP32 firmware acquisition, Cloudflare Nodrix backend deployment, and MCP-driven telemetry dashboard setup.",
-      "tags": [
-        "documentation",
-        "architecture",
-        "roadmap",
-        "telemetry",
-        "dashboard"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "document:docs/plan.md",
-      "type": "document",
-      "name": "plan.md",
-      "filePath": "docs/plan.md",
-      "summary": "Master project plan describing architecture decisions, hardware/simulation configurations, and milestone verification from sensor acquisition to cloud dashboard.",
-      "tags": [
-        "documentation",
-        "planning",
-        "architecture",
-        "milestones",
-        "iot"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "config:firmware/diagram.json",
-      "type": "config",
-      "name": "diagram.json",
-      "filePath": "firmware/diagram.json",
-      "summary": "Wokwi simulation circuit layout defining an ESP32 DevKit v4 connected to three potentiometers simulating temperature, humidity, and light sensors.",
-      "tags": [
-        "simulation",
-        "wokwi",
-        "hardware-circuit",
-        "configuration"
-      ],
-      "complexity": "moderate",
-      "languageNotes": "JSON schema specifying parts layout and pin-to-pin wiring connections for Wokwi virtual ESP32 hardware simulation."
-    },
-    {
-      "id": "config:firmware/platformio.ini",
-      "type": "config",
-      "name": "platformio.ini",
-      "filePath": "firmware/platformio.ini",
-      "summary": "PlatformIO configuration file for ESP32 target development, defining board settings, Arduino framework, upload/monitor baud rates, and external library dependencies.",
-      "tags": [
-        "platformio",
-        "configuration",
-        "build-system",
-        "embedded"
-      ],
-      "complexity": "simple",
-      "languageNotes": "INI format configuration specifying the espressif32 platform, esp32dev board, and libraries including Nodrix and ArduinoJson."
-    },
-    {
-      "id": "config:firmware/wokwi.toml",
-      "type": "config",
-      "name": "wokwi.toml",
-      "filePath": "firmware/wokwi.toml",
-      "summary": "Wokwi simulation configuration file specifying the relative paths to the compiled ESP32 firmware binary and ELF files generated by PlatformIO.",
-      "tags": [
-        "wokwi",
-        "simulation",
-        "configuration",
-        "embedded"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "document:README.md",
-      "type": "document",
-      "name": "README.md",
-      "filePath": "README.md",
-      "summary": "Comprehensive architectural overview and guide covering sensor signal acquisition, ESP32 ADC1 digitization, Wokwi simulation, and real-time Cloudflare/Nodrix IoT telemetry.",
-      "tags": [
-        "documentation",
-        "entry-point",
-        "architecture",
-        "overview"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "document:dashboard/README.md",
-      "type": "document",
-      "name": "README.md",
-      "filePath": "dashboard/README.md",
-      "summary": "Documentation for the sensor monitoring dashboard in Nodrix, detailing its 16-column grid layout, widget inventory, and variable mapping.",
-      "tags": [
-        "documentation",
-        "dashboard",
-        "iot",
-        "monitoring"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "config:dashboard/monitoreo_sensores.json",
-      "type": "config",
-      "name": "monitoreo_sensores.json",
-      "filePath": "dashboard/monitoreo_sensores.json",
-      "summary": "Exported Nodrix dashboard configuration specifying widget layouts for instantaneous values, analog gauges, and historical telemetry charts.",
-      "tags": [
-        "configuration",
-        "dashboard",
-        "widgets",
-        "telemetry"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "file:firmware/include/config.h",
-      "type": "file",
-      "name": "config.h",
-      "filePath": "firmware/include/config.h",
-      "summary": "Firmware configuration header defining ESP32 ADC1 pins, telemetry timing, baud rates, HTTP/TLS timeouts, and physical sensor scaling boundaries.",
-      "tags": [
-        "configuration",
-        "firmware",
-        "hardware",
-        "adc"
-      ],
-      "complexity": "simple",
-      "languageNotes": "Uses C++ constexpr for compile-time hardware pin definitions and scaling parameters."
-    },
-    {
-      "id": "file:firmware/include/secrets.h.example",
-      "type": "file",
-      "name": "secrets.h.example",
-      "filePath": "firmware/include/secrets.h.example",
-      "summary": "Template configuration file defining placeholders for WiFi network credentials, Nodrix Cloudflare Worker hostname, and project authentication tokens.",
-      "tags": [
-        "configuration",
-        "secrets",
-        "template",
-        "security"
-      ],
-      "complexity": "simple"
-    },
-    {
       "id": "file:firmware/src/sensors.cpp",
       "type": "file",
       "name": "sensors.cpp",
       "filePath": "firmware/src/sensors.cpp",
-      "summary": "Implements ADC initialization and physical magnitude calculation from ESP32 12-bit ADC readings.",
+      "summary": "Implements ADC initialization and physical magnitude calculation with per-sample range and validity verification.",
       "tags": [
         "firmware",
         "sensors",
@@ -359,13 +243,30 @@
       "complexity": "simple"
     },
     {
+      "id": "function:firmware/src/sensors.cpp:read_scaled_channel",
+      "type": "function",
+      "name": "read_scaled_channel",
+      "filePath": "firmware/src/sensors.cpp",
+      "lineRange": [
+        5,
+        19
+      ],
+      "summary": "Samples raw ADC channel value, scales it linearly to physical units, and verifies sanity bounds.",
+      "tags": [
+        "adc",
+        "scaling",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
       "id": "function:firmware/src/sensors.cpp:sensors_init",
       "type": "function",
       "name": "sensors_init",
       "filePath": "firmware/src/sensors.cpp",
       "lineRange": [
-        4,
-        13
+        21,
+        30
       ],
       "summary": "Configures ESP32 ADC1 resolution to 12 bits, attenuation to 11 dB, and sets up GPIO input pins for sensor channels.",
       "tags": [
@@ -382,10 +283,10 @@
       "name": "sensors_read",
       "filePath": "firmware/src/sensors.cpp",
       "lineRange": [
-        15,
-        30
+        32,
+        41
       ],
-      "summary": "Reads raw 12-bit values from ADC1 channels and applies linear interpolation formulas to return structured SensorData.",
+      "summary": "Reads and validates raw 12-bit values from ADC1 channels and returns structured SensorData.",
       "tags": [
         "sensing",
         "adc",
@@ -399,7 +300,7 @@
       "type": "file",
       "name": "sensors.h",
       "filePath": "firmware/src/sensors.h",
-      "summary": "Header declaring sensor data structures (SensorReading, SensorData) and function prototypes for ADC setup and sampling.",
+      "summary": "Header declaring sensor data structures (SensorReading with validity flag, SensorData) and function prototypes for ADC setup and sampling.",
       "tags": [
         "header",
         "data-model",
@@ -407,9 +308,153 @@
         "type-definition"
       ],
       "complexity": "simple"
+    },
+    {
+      "id": "file:firmware/src/telemetry.cpp",
+      "type": "file",
+      "name": "telemetry.cpp",
+      "filePath": "firmware/src/telemetry.cpp",
+      "summary": "Implements IoT telemetry communication using the Nodrix SDK over WebSockets and fast WiFi association, with per-metric validation and optional Root CA pinning.",
+      "tags": [
+        "telemetry",
+        "networking",
+        "nodrix",
+        "websocket",
+        "iot"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Integrates decoded-cipher/Nodrix library with channel-6 fast association and non-blocking WebSocket loop maintenance."
+    },
+    {
+      "id": "function:firmware/src/telemetry.cpp:connect_wifi_fast",
+      "type": "function",
+      "name": "connect_wifi_fast",
+      "filePath": "firmware/src/telemetry.cpp",
+      "lineRange": [
+        30,
+        56
+      ],
+      "summary": "Connects to WiFi with an optimized channel 6 scan for Wokwi-GUEST and fallback scanning for standard networks.",
+      "tags": [
+        "networking",
+        "wifi",
+        "optimization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:firmware/src/telemetry.cpp:telemetry_init",
+      "type": "function",
+      "name": "telemetry_init",
+      "filePath": "firmware/src/telemetry.cpp",
+      "lineRange": [
+        58,
+        108
+      ],
+      "summary": "Configures TLS mode (Root CA pinning or development insecure), initializes WiFi connection, and starts the Nodrix client session.",
+      "tags": [
+        "initialization",
+        "telemetry",
+        "nodrix",
+        "tls"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:firmware/src/telemetry.cpp:telemetry_run",
+      "type": "function",
+      "name": "telemetry_run",
+      "filePath": "firmware/src/telemetry.cpp",
+      "lineRange": [
+        110,
+        115
+      ],
+      "summary": "Drives the non-blocking Nodrix client event loop to maintain WebSocket frames and handle background network events.",
+      "tags": [
+        "event-loop",
+        "nodrix",
+        "telemetry"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:firmware/src/telemetry.cpp:telemetry_is_connected",
+      "type": "function",
+      "name": "telemetry_is_connected",
+      "filePath": "firmware/src/telemetry.cpp",
+      "lineRange": [
+        117,
+        123
+      ],
+      "summary": "Checks active connectivity status via the Nodrix WebSocket client or WiFi interface.",
+      "tags": [
+        "status-check",
+        "telemetry",
+        "wifi"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:firmware/src/telemetry.cpp:telemetry_publish",
+      "type": "function",
+      "name": "telemetry_publish",
+      "filePath": "firmware/src/telemetry.cpp",
+      "lineRange": [
+        125,
+        163
+      ],
+      "summary": "Staged sensor readings are individually validated and batched through Nodrix.send() and Nodrix.flush().",
+      "tags": [
+        "telemetry",
+        "publishing",
+        "batching",
+        "nodrix"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:firmware/src/telemetry.h",
+      "type": "file",
+      "name": "telemetry.h",
+      "filePath": "firmware/src/telemetry.h",
+      "summary": "Header defining public telemetry interface functions for WiFi initialization, network maintenance, and sensor data dispatch.",
+      "tags": [
+        "header",
+        "api-definition",
+        "telemetry"
+      ],
+      "complexity": "simple"
     }
   ],
   "edges": [
+    {
+      "source": "document:docs/implementation_plan.md",
+      "target": "document:docs/plan.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/acondicionamiento.md",
+      "target": "document:docs/plan.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:firmware/wokwi.toml",
+      "target": "config:firmware/diagram.json",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:firmware/wokwi.toml",
+      "target": "config:firmware/platformio.ini",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
     {
       "source": "file:firmware/src/main.cpp",
       "target": "function:firmware/src/main.cpp:setup",
@@ -425,67 +470,11 @@
       "weight": 1
     },
     {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:connect_wifi_fast",
-      "type": "contains",
+      "source": "file:firmware/src/main.cpp",
+      "target": "file:firmware/include/config.h",
+      "type": "imports",
       "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_init",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_run",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_is_connected",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_publish",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_init",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_run",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_is_connected",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_publish",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
+      "weight": 0.7
     },
     {
       "source": "file:firmware/src/main.cpp",
@@ -502,18 +491,11 @@
       "weight": 0.7
     },
     {
-      "source": "file:firmware/src/telemetry.cpp",
-      "target": "file:firmware/src/telemetry.h",
-      "type": "imports",
+      "source": "function:firmware/src/main.cpp:setup",
+      "target": "function:firmware/src/sensors.cpp:sensors_init",
+      "type": "calls",
       "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:firmware/src/telemetry.h",
-      "target": "file:firmware/src/sensors.h",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
+      "weight": 0.8
     },
     {
       "source": "function:firmware/src/main.cpp:setup",
@@ -531,8 +513,148 @@
     },
     {
       "source": "function:firmware/src/main.cpp:loop",
+      "target": "function:firmware/src/sensors.cpp:sensors_read",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:firmware/src/main.cpp:loop",
       "target": "function:firmware/src/telemetry.cpp:telemetry_publish",
       "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "file:firmware/src/sensors.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "file:firmware/include/config.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:read_scaled_channel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:sensors_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:sensors_read",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:sensors_init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:sensors_read",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:firmware/src/sensors.cpp:sensors_read",
+      "target": "function:firmware/src/sensors.cpp:read_scaled_channel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "file:firmware/src/telemetry.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "file:firmware/include/config.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:connect_wifi_fast",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:telemetry_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:telemetry_run",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:telemetry_is_connected",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:telemetry_publish",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:telemetry_init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:telemetry_run",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:telemetry_is_connected",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:firmware/src/telemetry.cpp",
+      "target": "function:firmware/src/telemetry.cpp:telemetry_publish",
+      "type": "exports",
       "direction": "forward",
       "weight": 0.8
     },
@@ -544,88 +666,11 @@
       "weight": 0.8
     },
     {
-      "source": "function:firmware/src/telemetry.cpp:telemetry_publish",
-      "target": "function:firmware/src/telemetry.cpp:telemetry_is_connected",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "document:docs/implementation_plan.md",
-      "target": "document:docs/acondicionamiento.md",
-      "type": "related",
+      "source": "document:README.md",
+      "target": "file:firmware/src/main.cpp",
+      "type": "documents",
       "direction": "forward",
       "weight": 0.5
-    },
-    {
-      "source": "document:docs/plan.md",
-      "target": "document:docs/acondicionamiento.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/plan.md",
-      "target": "document:docs/implementation_plan.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "config:firmware/wokwi.toml",
-      "target": "config:firmware/platformio.ini",
-      "type": "depends_on",
-      "direction": "forward",
-      "weight": 0.6
-    },
-    {
-      "source": "config:firmware/wokwi.toml",
-      "target": "config:firmware/diagram.json",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:firmware/src/sensors.cpp",
-      "target": "file:firmware/src/sensors.h",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:firmware/src/sensors.cpp",
-      "target": "function:firmware/src/sensors.cpp:sensors_init",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:firmware/src/sensors.cpp",
-      "target": "function:firmware/src/sensors.cpp:sensors_read",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:firmware/src/sensors.cpp",
-      "target": "function:firmware/src/sensors.cpp:sensors_init",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:firmware/src/sensors.cpp",
-      "target": "function:firmware/src/sensors.cpp:sensors_read",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:firmware/src/sensors.cpp",
-      "target": "file:firmware/include/config.h",
-      "type": "depends_on",
-      "direction": "forward",
-      "weight": 0.6
     },
     {
       "source": "document:dashboard/README.md",
@@ -635,46 +680,18 @@
       "weight": 0.5
     },
     {
-      "source": "document:README.md",
-      "target": "file:firmware/include/config.h",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:README.md",
-      "target": "config:dashboard/monitoreo_sensores.json",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:README.md",
-      "target": "file:firmware/src/sensors.cpp",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:README.md",
-      "target": "document:dashboard/README.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:firmware/include/secrets.h.example",
       "target": "file:firmware/src/telemetry.cpp",
-      "type": "related",
+      "type": "configures",
       "direction": "forward",
-      "weight": 0.5
+      "weight": 0.6
     }
   ],
   "layers": [
     {
       "id": "layer:firmware-core",
       "name": "Firmware Core",
-      "description": "ESP32 firmware application entry point, sampling loop, ADC signal acquisition, and hardware pin definitions.",
+      "description": "ESP32 firmware application entry point, sampling loop, ADC signal acquisition with validity checks, and hardware pin definitions.",
       "nodeIds": [
         "file:firmware/src/main.cpp",
         "file:firmware/src/sensors.cpp",
@@ -685,7 +702,7 @@
     {
       "id": "layer:telemetry-networking",
       "name": "Telemetry & Networking",
-      "description": "IoT network connectivity, secure HTTPS transport over TLS keep-alive, and credential template configuration.",
+      "description": "IoT network connectivity, Nodrix WebSocket client with channel-6 fast association, TLS Root CA pinning, and credential template configuration.",
       "nodeIds": [
         "file:firmware/src/telemetry.cpp",
         "file:firmware/src/telemetry.h",
@@ -727,7 +744,7 @@
     {
       "order": 1,
       "title": "Architecture & Project Overview",
-      "description": "Start with README.md to understand the complete sensorica_blueprint system architecture spanning simulated sensing, ESP32 ADC digitization, and Cloudflare Nodrix cloud telemetry. It details the end-to-end data pipeline, repository structure, and physical channel mapping.",
+      "description": "Start with README.md to understand the complete sensorica_blueprint system architecture spanning simulated sensing, ESP32 ADC digitization, and Cloudflare Nodrix cloud telemetry with Root CA verification. It details the end-to-end data pipeline, repository structure, and physical channel mapping.",
       "nodeIds": [
         "document:README.md"
       ],
@@ -756,7 +773,7 @@
     {
       "order": 4,
       "title": "Firmware Parameters & Credentials",
-      "description": "Building on the hardware definitions from Step 2, config.h defines ADC1 pin constants, physical magnitude conversion boundaries, and telemetry dispatch intervals. The secrets template provides secure placeholders for WiFi credentials and Nodrix Cloudflare endpoints without exposing private tokens in version control.",
+      "description": "Building on the hardware definitions from Step 2, config.h defines ADC1 pin constants, actuator pins, physical magnitude conversion boundaries, and telemetry dispatch intervals. The secrets template provides secure placeholders for WiFi credentials, Nodrix Cloudflare endpoints, and Root CA certificate pinning.",
       "nodeIds": [
         "file:firmware/include/config.h",
         "file:firmware/include/secrets.h.example"
@@ -766,7 +783,7 @@
     {
       "order": 5,
       "title": "ADC Acquisition & Conversion",
-      "description": "This core module implements the 12-bit ADC digitization and linear scaling logic defined in config.h. It declares the SensorReading and SensorData structures, providing clean, strongly typed representations of temperature, humidity, and illumination for upstream consumption.",
+      "description": "This core module implements the 12-bit ADC digitization, linear scaling, and per-sample sanity validation logic defined in config.h. It declares the SensorReading and SensorData structures, providing clean, strongly typed representations of temperature, humidity, and illumination with error flags.",
       "nodeIds": [
         "file:firmware/src/sensors.h",
         "file:firmware/src/sensors.cpp"
@@ -776,17 +793,17 @@
     {
       "order": 6,
       "title": "Network Transport & Telemetry",
-      "description": "With sensor readings structured in Step 5, the telemetry subsystem manages WiFi connectivity and formats payloads for cloud delivery. It establishes persistent TLS keep-alive connections over HTTPS to serialize sensor data as JSON and dispatch it to the Nodrix Cloudflare Worker API.",
+      "description": "With sensor readings structured in Step 5, the telemetry subsystem manages WiFi connectivity and cloud delivery via the Nodrix SDK. It uses fast channel-6 AP association for Wokwi, drives non-blocking WebSockets, validates sensor metrics individually, and supports TLS Root CA pinning.",
       "nodeIds": [
         "file:firmware/src/telemetry.h",
         "file:firmware/src/telemetry.cpp"
       ],
-      "languageLesson": "Reusing persistent TLS sessions with WiFiClientSecure avoids expensive cryptographic handshakes on every periodic HTTP POST, preserving embedded CPU cycles and memory."
+      "languageLesson": "Using official SDKs with persistent WebSocket connections eliminates repeated TLS handshakes, reducing CPU cycles and memory overhead on resource-constrained microcontrollers."
     },
     {
       "order": 7,
       "title": "Main Firmware Application Loop",
-      "description": "The main entry point ties together sensor sampling from Step 5 and telemetry dispatch from Step 6. Operating inside Arduino's setup and loop lifecycle, it initializes hardware, periodically captures sensor data, verifies network health, and handles transmission error recovery.",
+      "description": "The main entry point ties together sensor sampling from Step 5 and telemetry dispatch from Step 6. Operating inside Arduino's setup and loop lifecycle, it initializes hardware, periodically captures sensor data, drives the non-blocking Nodrix loop, and recovers gracefully from transient link drops.",
       "nodeIds": [
         "file:firmware/src/main.cpp"
       ],

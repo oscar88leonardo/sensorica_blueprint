@@ -1,0 +1,53 @@
+[
+  {
+    "id": "layer:firmware-core",
+    "name": "Firmware Core",
+    "description": "ESP32 firmware application entry point, sampling loop, ADC signal acquisition with validity checks, and hardware pin definitions.",
+    "nodeIds": [
+      "file:firmware/src/main.cpp",
+      "file:firmware/src/sensors.cpp",
+      "file:firmware/src/sensors.h",
+      "file:firmware/include/config.h"
+    ]
+  },
+  {
+    "id": "layer:telemetry-networking",
+    "name": "Telemetry & Networking",
+    "description": "IoT network connectivity, Nodrix WebSocket client with channel-6 fast association, TLS Root CA pinning, and credential template configuration.",
+    "nodeIds": [
+      "file:firmware/src/telemetry.cpp",
+      "file:firmware/src/telemetry.h",
+      "file:firmware/include/secrets.h.example"
+    ]
+  },
+  {
+    "id": "layer:simulation-hardware",
+    "name": "Simulation & Build",
+    "description": "Wokwi virtual hardware circuit diagram, PlatformIO build environment, and simulation metadata.",
+    "nodeIds": [
+      "config:firmware/diagram.json",
+      "config:firmware/platformio.ini",
+      "config:firmware/wokwi.toml"
+    ]
+  },
+  {
+    "id": "layer:application-dashboard",
+    "name": "Application & Dashboard",
+    "description": "Cloud telemetry visualization, Nodrix widget layouts, and dashboard documentation.",
+    "nodeIds": [
+      "config:dashboard/monitoreo_sensores.json",
+      "document:dashboard/README.md"
+    ]
+  },
+  {
+    "id": "layer:documentation",
+    "name": "Documentation",
+    "description": "Architectural specifications, signal conditioning theory, and implementation planning roadmaps.",
+    "nodeIds": [
+      "document:README.md",
+      "document:docs/acondicionamiento.md",
+      "document:docs/implementation_plan.md",
+      "document:docs/plan.md"
+    ]
+  }
+]

@@ -1,25 +1,11 @@
 {
-  "name": "sensorica_blueprint",
-  "description": "End-to-end sensing, digitization, and IoT telemetry architecture for ESP32 with PlatformIO, Wokwi simulation, and Cloudflare/Nodrix integration.",
-  "languages": [
-    "c",
-    "cpp",
-    "json",
-    "markdown",
-    "toml"
-  ],
-  "frameworks": [
-    "Arduino",
-    "PlatformIO",
-    "ESP32",
-    "Nodrix",
-    "ArduinoJson"
-  ],
+  "scriptCompleted": true,
+  "contentDigest": "2a50c6a26ae9f3dda8189f502b44867f9fa9faca0dd6251857da1b891edea812",
   "files": [
     {
       "path": "README.md",
       "language": "markdown",
-      "sizeLines": 152,
+      "sizeLines": 159,
       "fileCategory": "docs"
     },
     {
@@ -61,13 +47,13 @@
     {
       "path": "firmware/include/config.h",
       "language": "c",
-      "sizeLines": 38,
+      "sizeLines": 42,
       "fileCategory": "code"
     },
     {
       "path": "firmware/include/secrets.h.example",
       "language": "example",
-      "sizeLines": 13,
+      "sizeLines": 17,
       "fileCategory": "code"
     },
     {
@@ -79,25 +65,25 @@
     {
       "path": "firmware/src/main.cpp",
       "language": "cpp",
-      "sizeLines": 53,
+      "sizeLines": 60,
       "fileCategory": "code"
     },
     {
       "path": "firmware/src/sensors.cpp",
       "language": "cpp",
-      "sizeLines": 30,
+      "sizeLines": 41,
       "fileCategory": "code"
     },
     {
       "path": "firmware/src/sensors.h",
       "language": "c",
-      "sizeLines": 25,
+      "sizeLines": 26,
       "fileCategory": "code"
     },
     {
       "path": "firmware/src/telemetry.cpp",
       "language": "cpp",
-      "sizeLines": 160,
+      "sizeLines": 163,
       "fileCategory": "code"
     },
     {
@@ -116,31 +102,22 @@
   "totalFiles": 16,
   "filteredByIgnore": 0,
   "estimatedComplexity": "small",
-  "importMap": {
-    "README.md": [],
-    "dashboard/README.md": [],
-    "dashboard/monitoreo_sensores.json": [],
-    "docs/acondicionamiento.md": [],
-    "docs/implementation_plan.md": [],
-    "docs/plan.md": [],
-    "firmware/diagram.json": [],
-    "firmware/include/config.h": [],
-    "firmware/include/secrets.h.example": [],
-    "firmware/platformio.ini": [],
-    "firmware/src/main.cpp": [
-      "firmware/src/sensors.h",
-      "firmware/src/telemetry.h"
-    ],
-    "firmware/src/sensors.cpp": [
-      "firmware/src/sensors.h"
-    ],
-    "firmware/src/sensors.h": [],
-    "firmware/src/telemetry.cpp": [
-      "firmware/src/telemetry.h"
-    ],
-    "firmware/src/telemetry.h": [
-      "firmware/src/sensors.h"
-    ],
-    "firmware/wokwi.toml": []
+  "failures": [],
+  "stats": {
+    "filesScanned": 16,
+    "byCategory": {
+      "docs": 5,
+      "config": 4,
+      "code": 7
+    },
+    "byLanguage": {
+      "markdown": 5,
+      "json": 2,
+      "c": 3,
+      "example": 1,
+      "config": 1,
+      "cpp": 3,
+      "toml": 1
+    }
   }
 }

@@ -1,0 +1,15 @@
+{
+  "projectRoot": "/home/leonard0/eCodes/sensorica_blueprint",
+  "batchFiles": [
+    {"path": "README.md", "language": "markdown", "sizeLines": 159, "fileCategory": "docs"},
+    {"path": "firmware/include/secrets.h.example", "language": "example", "sizeLines": 17, "fileCategory": "code"},
+    {"path": "firmware/src/sensors.cpp", "language": "cpp", "sizeLines": 41, "fileCategory": "code"},
+    {"path": "firmware/src/sensors.h", "language": "c", "sizeLines": 26, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "README.md": [],
+    "firmware/include/secrets.h.example": [],
+    "firmware/src/sensors.cpp": ["firmware/src/sensors.h"],
+    "firmware/src/sensors.h": []
+  }
+}

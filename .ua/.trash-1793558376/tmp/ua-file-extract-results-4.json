@@ -1,0 +1,267 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [
+    "firmware/include/secrets.h.example"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 2,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "results": [
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 159,
+      "nonEmptyLines": 114,
+      "sections": [
+        {
+          "heading": "Sensorica Blueprint",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Arquitectura",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Estructura del Repositorio",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "Mapeo de Magnitudes Físicas",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Documentación y Guías",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "Cómo Reproducir el Proyecto desde GitHub",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "Requisitos Previos",
+          "level": 3,
+          "line": 73
+        },
+        {
+          "heading": "1. Clonar el repositorio",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "2. Configurar las credenciales (`secrets.h`)",
+          "level": 3,
+          "line": 86
+        },
+        {
+          "heading": "3. Compilar el firmware",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "4. Iniciar la simulación en Wokwi",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "5. Configurar o visualizar el Dashboard en Nodrix",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "Simulación en Wokwi (Etapas 1 y 2)",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "Dashboard en Tiempo Real (Etapa 3)",
+          "level": 2,
+          "line": 147
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "firmware/src/sensors.cpp",
+      "language": "cpp",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "read_scaled_channel",
+          "startLine": 5,
+          "endLine": 19,
+          "params": [
+            "pin",
+            "min_val",
+            "max_val"
+          ]
+        },
+        {
+          "name": "sensors_init",
+          "startLine": 21,
+          "endLine": 30,
+          "params": []
+        },
+        {
+          "name": "sensors_read",
+          "startLine": 32,
+          "endLine": 41,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "sensors_init",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "sensors_read",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "read_scaled_channel",
+          "callee": "analogRead",
+          "lineNumber": 7
+        },
+        {
+          "caller": "read_scaled_channel",
+          "callee": "static_cast<float>",
+          "lineNumber": 15
+        },
+        {
+          "caller": "read_scaled_channel",
+          "callee": "isnan",
+          "lineNumber": 16
+        },
+        {
+          "caller": "read_scaled_channel",
+          "callee": "isinf",
+          "lineNumber": 16
+        },
+        {
+          "caller": "sensors_init",
+          "callee": "analogReadResolution",
+          "lineNumber": 23
+        },
+        {
+          "caller": "sensors_init",
+          "callee": "analogSetAttenuation",
+          "lineNumber": 24
+        },
+        {
+          "caller": "sensors_init",
+          "callee": "pinMode",
+          "lineNumber": 27
+        },
+        {
+          "caller": "sensors_init",
+          "callee": "pinMode",
+          "lineNumber": 28
+        },
+        {
+          "caller": "sensors_init",
+          "callee": "pinMode",
+          "lineNumber": 29
+        },
+        {
+          "caller": "sensors_read",
+          "callee": "read_scaled_channel",
+          "lineNumber": 36
+        },
+        {
+          "caller": "sensors_read",
+          "callee": "read_scaled_channel",
+          "lineNumber": 37
+        },
+        {
+          "caller": "sensors_read",
+          "callee": "read_scaled_channel",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "firmware/src/sensors.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 21,
+      "classes": [
+        {
+          "name": "SensorReading",
+          "startLine": 5,
+          "endLine": 9,
+          "methods": [],
+          "properties": [
+            "raw_adc",
+            "value",
+            "valid"
+          ]
+        },
+        {
+          "name": "SensorData",
+          "startLine": 11,
+          "endLine": 15,
+          "methods": [],
+          "properties": [
+            "temperatura",
+            "humedad",
+            "iluminacion"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SensorReading",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "SensorData",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    }
+  ]
+}

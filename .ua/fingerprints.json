@@ -1,16 +1,16 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "a5f0b1ab39b701dcadd7793a6057abfc8165c69a",
-  "generatedAt": "2026-10-31T17:14:42.467Z",
+  "gitCommitHash": "85d0370099b217642f4b584e15904822c3e12ffe",
+  "generatedAt": "2026-11-01T18:39:30.648Z",
   "files": {
     "README.md": {
       "filePath": "README.md",
-      "contentHash": "bee7fdec8a53ab1e893059edc7ff0420f2476f7e6f6881cfcf25b11ecd337aca",
+      "contentHash": "fcf94cd63399126aeb56ae8b7a7dc20c5d4a79d27acf6349c55aae88ccfbac6d",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 153,
+      "totalLines": 160,
       "hasStructuralAnalysis": false
     },
     "dashboard/README.md": {
@@ -75,7 +75,7 @@
     },
     "firmware/include/config.h": {
       "filePath": "firmware/include/config.h",
-      "contentHash": "a3227be024eb8529d6f66fb268425fb54585d62653afe88bde50126766f6ea38",
+      "contentHash": "7b4c932f3bf22b6002c6edac0cd60fe9e008bf14ab433079c6b1e83306ab9342",
       "functions": [],
       "classes": [],
       "imports": [
@@ -87,17 +87,17 @@
         }
       ],
       "exports": [],
-      "totalLines": 39,
+      "totalLines": 43,
       "hasStructuralAnalysis": true
     },
     "firmware/include/secrets.h.example": {
       "filePath": "firmware/include/secrets.h.example",
-      "contentHash": "7238549d886f58d340d04e8be0e8ce87f0455f8d2e1ac7102113661aedd9e48e",
+      "contentHash": "8498bc1b3513ff6c32837c1244f690728d297e470c10f131a98e55667c117669",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 14,
+      "totalLines": 18,
       "hasStructuralAnalysis": false
     },
     "firmware/platformio.ini": {
@@ -112,7 +112,7 @@
     },
     "firmware/src/main.cpp": {
       "filePath": "firmware/src/main.cpp",
-      "contentHash": "d8953d896befcedd13c5cc4f961254aa4448f21b75cbd98b7d82d0a0b39effee",
+      "contentHash": "99fa705c5a0f3df1daa42afc7fa182e5500a64a7f3b364a0d41a4e4aefae8b59",
       "functions": [
         {
           "name": "setup",
@@ -128,7 +128,7 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 25
+          "lineCount": 32
         }
       ],
       "classes": [],
@@ -162,13 +162,25 @@
         "setup",
         "loop"
       ],
-      "totalLines": 54,
+      "totalLines": 61,
       "hasStructuralAnalysis": true
     },
     "firmware/src/sensors.cpp": {
       "filePath": "firmware/src/sensors.cpp",
-      "contentHash": "e7f60439a433dabd260689094a3cd4298bebeead68790ac19dae1e35a04c5901",
+      "contentHash": "4da0d2f1b6f4aa32b8cd9d1fc89b6f174647bdeaf25c976a94b3bd2b240fd29a",
       "functions": [
+        {
+          "name": "read_scaled_channel",
+          "owner": "",
+          "params": [
+            "pin",
+            "min_val",
+            "max_val"
+          ],
+          "returnType": "SensorReading",
+          "exported": false,
+          "lineCount": 15
+        },
         {
           "name": "sensors_init",
           "owner": "",
@@ -183,7 +195,7 @@
           "params": [],
           "returnType": "SensorData",
           "exported": true,
-          "lineCount": 16
+          "lineCount": 10
         }
       ],
       "classes": [],
@@ -199,18 +211,24 @@
           "specifiers": [
             "config.h"
           ]
+        },
+        {
+          "source": "math.h",
+          "specifiers": [
+            "math.h"
+          ]
         }
       ],
       "exports": [
         "sensors_init",
         "sensors_read"
       ],
-      "totalLines": 31,
+      "totalLines": 42,
       "hasStructuralAnalysis": true
     },
     "firmware/src/sensors.h": {
       "filePath": "firmware/src/sensors.h",
-      "contentHash": "05616ec526ef673bbc90fc3dd7a03576207e7cd89305ad4dc822d22e4777ea00",
+      "contentHash": "ee73bfccefe1f026e470fc591c45edd2771e8d49e4b71d899167d871b84746e0",
       "functions": [],
       "classes": [
         {
@@ -218,10 +236,11 @@
           "methods": [],
           "properties": [
             "raw_adc",
-            "value"
+            "value",
+            "valid"
           ],
           "exported": true,
-          "lineCount": 4
+          "lineCount": 5
         },
         {
           "name": "SensorData",
@@ -247,12 +266,12 @@
         "SensorReading",
         "SensorData"
       ],
-      "totalLines": 26,
+      "totalLines": 27,
       "hasStructuralAnalysis": true
     },
     "firmware/src/telemetry.cpp": {
       "filePath": "firmware/src/telemetry.cpp",
-      "contentHash": "b67e891928229605f0942f3a56c423ee5bb4eb28d6c63b6d0e1937df1590b599",
+      "contentHash": "f6a8690113c8e69ad3d38159067472989305da51384ea56b845086d90b947a9d",
       "functions": [
         {
           "name": "round2",
@@ -278,7 +297,7 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 32
+          "lineCount": 51
         },
         {
           "name": "telemetry_run",
@@ -286,7 +305,7 @@
           "params": [],
           "returnType": "void",
           "exported": true,
-          "lineCount": 15
+          "lineCount": 6
         },
         {
           "name": "telemetry_is_connected",
@@ -294,7 +313,7 @@
           "params": [],
           "returnType": "bool",
           "exported": true,
-          "lineCount": 3
+          "lineCount": 7
         },
         {
           "name": "telemetry_publish",
@@ -304,7 +323,7 @@
           ],
           "returnType": "bool",
           "exported": true,
-          "lineCount": 51
+          "lineCount": 39
         }
       ],
       "classes": [],
@@ -334,27 +353,15 @@
           ]
         },
         {
-          "source": "ArduinoJson.h",
+          "source": "Nodrix.h",
           "specifiers": [
-            "ArduinoJson.h"
-          ]
-        },
-        {
-          "source": "HTTPClient.h",
-          "specifiers": [
-            "HTTPClient.h"
+            "Nodrix.h"
           ]
         },
         {
           "source": "WiFi.h",
           "specifiers": [
             "WiFi.h"
-          ]
-        },
-        {
-          "source": "WiFiClientSecure.h",
-          "specifiers": [
-            "WiFiClientSecure.h"
           ]
         },
         {
@@ -370,7 +377,7 @@
         "telemetry_is_connected",
         "telemetry_publish"
       ],
-      "totalLines": 161,
+      "totalLines": 164,
       "hasStructuralAnalysis": true
     },
     "firmware/src/telemetry.h": {

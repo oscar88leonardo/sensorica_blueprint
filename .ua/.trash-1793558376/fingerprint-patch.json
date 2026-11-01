@@ -1,0 +1,326 @@
+{
+  "version": "1.0.0",
+  "baseCommit": "a5f0b1ab39b701dcadd7793a6057abfc8165c69a",
+  "headCommit": "85d0370099b217642f4b584e15904822c3e12ffe",
+  "generatedAt": "2026-11-01T18:32:23.710Z",
+  "files": {
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "fcf94cd63399126aeb56ae8b7a7dc20c5d4a79d27acf6349c55aae88ccfbac6d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 160,
+      "hasStructuralAnalysis": false
+    },
+    "firmware/diagram.json": {
+      "filePath": "firmware/diagram.json",
+      "contentHash": "fd216aad06bdc0275bd72b21591b2e6e5d9611769ce8bb4e7c9514cef6b05dea",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 128,
+      "hasStructuralAnalysis": false
+    },
+    "firmware/include/config.h": {
+      "filePath": "firmware/include/config.h",
+      "contentHash": "7b4c932f3bf22b6002c6edac0cd60fe9e008bf14ab433079c6b1e83306ab9342",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Arduino.h",
+          "specifiers": [
+            "Arduino.h"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": true
+    },
+    "firmware/include/secrets.h.example": {
+      "filePath": "firmware/include/secrets.h.example",
+      "contentHash": "8498bc1b3513ff6c32837c1244f690728d297e470c10f131a98e55667c117669",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 18,
+      "hasStructuralAnalysis": false
+    },
+    "firmware/src/main.cpp": {
+      "filePath": "firmware/src/main.cpp",
+      "contentHash": "99fa705c5a0f3df1daa42afc7fa182e5500a64a7f3b364a0d41a4e4aefae8b59",
+      "functions": [
+        {
+          "name": "setup",
+          "owner": "",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "loop",
+          "owner": "",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 32
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Arduino.h",
+          "specifiers": [
+            "Arduino.h"
+          ]
+        },
+        {
+          "source": "config.h",
+          "specifiers": [
+            "config.h"
+          ]
+        },
+        {
+          "source": "sensors.h",
+          "specifiers": [
+            "sensors.h"
+          ]
+        },
+        {
+          "source": "telemetry.h",
+          "specifiers": [
+            "telemetry.h"
+          ]
+        }
+      ],
+      "exports": [
+        "setup",
+        "loop"
+      ],
+      "totalLines": 61,
+      "hasStructuralAnalysis": true
+    },
+    "firmware/src/sensors.cpp": {
+      "filePath": "firmware/src/sensors.cpp",
+      "contentHash": "4da0d2f1b6f4aa32b8cd9d1fc89b6f174647bdeaf25c976a94b3bd2b240fd29a",
+      "functions": [
+        {
+          "name": "read_scaled_channel",
+          "owner": "",
+          "params": [
+            "pin",
+            "min_val",
+            "max_val"
+          ],
+          "returnType": "SensorReading",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "sensors_init",
+          "owner": "",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "sensors_read",
+          "owner": "",
+          "params": [],
+          "returnType": "SensorData",
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sensors.h",
+          "specifiers": [
+            "sensors.h"
+          ]
+        },
+        {
+          "source": "config.h",
+          "specifiers": [
+            "config.h"
+          ]
+        },
+        {
+          "source": "math.h",
+          "specifiers": [
+            "math.h"
+          ]
+        }
+      ],
+      "exports": [
+        "sensors_init",
+        "sensors_read"
+      ],
+      "totalLines": 42,
+      "hasStructuralAnalysis": true
+    },
+    "firmware/src/sensors.h": {
+      "filePath": "firmware/src/sensors.h",
+      "contentHash": "ee73bfccefe1f026e470fc591c45edd2771e8d49e4b71d899167d871b84746e0",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SensorReading",
+          "methods": [],
+          "properties": [
+            "raw_adc",
+            "value",
+            "valid"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "SensorData",
+          "methods": [],
+          "properties": [
+            "temperatura",
+            "humedad",
+            "iluminacion"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "Arduino.h",
+          "specifiers": [
+            "Arduino.h"
+          ]
+        }
+      ],
+      "exports": [
+        "SensorReading",
+        "SensorData"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "firmware/src/telemetry.cpp": {
+      "filePath": "firmware/src/telemetry.cpp",
+      "contentHash": "f6a8690113c8e69ad3d38159067472989305da51384ea56b845086d90b947a9d",
+      "functions": [
+        {
+          "name": "round2",
+          "owner": "",
+          "params": [
+            "val"
+          ],
+          "returnType": "float",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "connect_wifi_fast",
+          "owner": "",
+          "params": [],
+          "returnType": "void",
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "telemetry_init",
+          "owner": "",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 51
+        },
+        {
+          "name": "telemetry_run",
+          "owner": "",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "telemetry_is_connected",
+          "owner": "",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "telemetry_publish",
+          "owner": "",
+          "params": [
+            "data"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 39
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "telemetry.h",
+          "specifiers": [
+            "telemetry.h"
+          ]
+        },
+        {
+          "source": "config.h",
+          "specifiers": [
+            "config.h"
+          ]
+        },
+        {
+          "source": "secrets.h",
+          "specifiers": [
+            "secrets.h"
+          ]
+        },
+        {
+          "source": "../include/secrets.h",
+          "specifiers": [
+            "../include/secrets.h"
+          ]
+        },
+        {
+          "source": "Nodrix.h",
+          "specifiers": [
+            "Nodrix.h"
+          ]
+        },
+        {
+          "source": "WiFi.h",
+          "specifiers": [
+            "WiFi.h"
+          ]
+        },
+        {
+          "source": "math.h",
+          "specifiers": [
+            "math.h"
+          ]
+        }
+      ],
+      "exports": [
+        "telemetry_init",
+        "telemetry_run",
+        "telemetry_is_connected",
+        "telemetry_publish"
+      ],
+      "totalLines": 164,
+      "hasStructuralAnalysis": true
+    }
+  },
+  "deletedFiles": []
+}
