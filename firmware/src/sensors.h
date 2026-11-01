@@ -5,6 +5,7 @@
 struct SensorReading {
     uint16_t raw_adc;
     float value;
+    bool valid;
 };
 
 struct SensorData {

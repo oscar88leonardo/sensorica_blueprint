@@ -27,27 +27,34 @@ void setup() {
 }
 
 void loop() {
-    // Mantener la pila de red y el cliente Nodrix
+    // Regla 3 de nodrix-esp32: mantener Nodrix.run() de forma continua sin bloqueos ni delay()
     telemetry_run();
 
     unsigned long current_time = millis();
 
-    // Muestreo y publicación periódica cada TELEMETRY_INTERVAL_MS (10 segundos)
+    // Muestreo y publicación periódica cada TELEMETRY_INTERVAL_MS
     if (current_time - last_telemetry_time >= TELEMETRY_INTERVAL_MS) {
         last_telemetry_time = current_time;
 
-        // Lectura de los 3 canales analógicos
+        // Lectura validada de los 3 canales analógicos
         SensorData data = sensors_read();
 
         // Salida formateada en monitor serie
         Serial.printf("[ADC1] T=%lu ms | ", current_time);
-        Serial.printf("Temp: raw=%4u (%.1f °C) | ", data.temperatura.raw_adc, data.temperatura.value);
-        Serial.printf("Hum: raw=%4u (%.1f %% HR) | ", data.humedad.raw_adc, data.humedad.value);
-        Serial.printf("Lux: raw=%4u (%.1f lx)\n", data.iluminacion.raw_adc, data.iluminacion.value);
+        Serial.printf("Temp: raw=%4u (%.1f °C)%s | ",
+                      data.temperatura.raw_adc,
+                      data.temperatura.value,
+                      data.temperatura.valid ? "" : " [INVALID]");
+        Serial.printf("Hum: raw=%4u (%.1f %% HR)%s | ",
+                      data.humedad.raw_adc,
+                      data.humedad.value,
+                      data.humedad.valid ? "" : " [INVALID]");
+        Serial.printf("Lux: raw=%4u (%.1f lx)%s\n",
+                      data.iluminacion.raw_adc,
+                      data.iluminacion.value,
+                      data.iluminacion.valid ? "" : " [INVALID]");
 
-        // Envío de métricas a la nube Nodrix
+        // Envío de métricas válidas a la nube Nodrix
         telemetry_publish(data);
     }
-
-    delay(20);
 }

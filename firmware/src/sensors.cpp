@@ -1,5 +1,22 @@
 #include "sensors.h"
 #include "config.h"
+#include <math.h>
+
+static SensorReading read_scaled_channel(uint8_t pin, float min_val, float max_val) {
+    SensorReading reading{};
+    reading.raw_adc = analogRead(pin);
+
+    if (reading.raw_adc > ADC_RAW_MAX) {
+        reading.value = NAN;
+        reading.valid = false;
+        return reading;
+    }
+
+    reading.value = (static_cast<float>(reading.raw_adc) * (max_val - min_val) / ADC_MAX_VAL) + min_val;
+    reading.valid = !isnan(reading.value) && !isinf(reading.value) &&
+                    (reading.value >= min_val) && (reading.value <= max_val);
+    return reading;
+}
 
 void sensors_init() {
     // Configurar resolución de 12 bits (0 - 4095) y atenuación de 11 dB (escala completa hasta ~3.3V)
@@ -13,18 +30,12 @@ void sensors_init() {
 }
 
 SensorData sensors_read() {
-    SensorData data;
+    SensorData data{};
 
-    // Lectura cruda del convertidor analógico a digital (12 bits)
-    data.temperatura.raw_adc = analogRead(PIN_TEMP);
-    data.humedad.raw_adc     = analogRead(PIN_HUM);
-    data.iluminacion.raw_adc = analogRead(PIN_LUX);
-
-    // Escalado lineal directo a unidades físicas:
-    // valor = raw * (MAX - MIN) / ADC_MAX_VAL + MIN
-    data.temperatura.value = (static_cast<float>(data.temperatura.raw_adc) * (TEMP_MAX - TEMP_MIN) / ADC_MAX_VAL) + TEMP_MIN;
-    data.humedad.value     = (static_cast<float>(data.humedad.raw_adc) * (HUM_MAX - HUM_MIN) / ADC_MAX_VAL) + HUM_MIN;
-    data.iluminacion.value = (static_cast<float>(data.iluminacion.raw_adc) * (LUX_MAX - LUX_MIN) / ADC_MAX_VAL) + LUX_MIN;
+    // Lectura y validación individual por canal (Regla 1 de nodrix-esp32)
+    data.temperatura = read_scaled_channel(PIN_TEMP, TEMP_MIN, TEMP_MAX);
+    data.humedad     = read_scaled_channel(PIN_HUM, HUM_MIN, HUM_MAX);
+    data.iluminacion = read_scaled_channel(PIN_LUX, LUX_MIN, LUX_MAX);
 
     return data;
 }

@@ -9,22 +9,23 @@
     #error "secrets.h no encontrado. Crea secrets.h basándote en secrets.h.example con tus credenciales."
 #endif
 
-#include <ArduinoJson.h>
-#include <HTTPClient.h>
+#include <Nodrix.h>
 #include <WiFi.h>
-#include <WiFiClientSecure.h>
 #include <math.h>
-
-// Instancias persistentes para reutilizar la misma sesion TLS (HTTP Keep-Alive)
-static WiFiClientSecure s_tlsClient;
-static HTTPClient       s_http;
-static String           s_telemetryUrl;
-static String           s_authHeader;
-static unsigned long    s_lastWifiRetry = 0;
 
 static float round2(float val) {
     return roundf(val * 100.0f) / 100.0f;
 }
+
+#ifdef ENABLE_NODRIX_RELAY_CONTROL
+// Handler de escritura desde la nube (debe declararse en ámbito de archivo según nodrix-esp32)
+NODRIX_WRITE("relay") {
+    bool relay_state = value.asBool();
+    digitalWrite(PIN_RELAY, relay_state ? HIGH : LOW);
+    // Confirmar el estado real del hardware hacia el dashboard
+    Nodrix.send("relay", relay_state);
+}
+#endif
 
 static void connect_wifi_fast() {
     if (WiFi.status() == WL_CONNECTED) return;
@@ -32,7 +33,7 @@ static void connect_wifi_fast() {
     WiFi.mode(WIFI_STA);
     WiFi.setSleep(false);
 
-    // En Wokwi-GUEST el AP virtual opera en el canal 6 (evita escaneo de 13 canales)
+    // En Wokwi-GUEST el AP virtual opera en el canal 6 (evita escaneo lento de 13 canales en WiFiMulti)
     if (strcmp(WIFI_SSID, "Wokwi-GUEST") == 0) {
         WiFi.begin(WIFI_SSID, WIFI_PASS, 6);
         unsigned long t0 = millis();
@@ -57,104 +58,106 @@ static void connect_wifi_fast() {
 void telemetry_init() {
     Serial.println();
     Serial.println(F("=================================================="));
-    Serial.println(F("  Inicializando Telemetria Nodrix (HTTPS Reuse)   "));
+    Serial.println(F("  Inicializando Telemetria Nodrix SDK             "));
     Serial.println(F("=================================================="));
 
-    s_telemetryUrl = String("https://") + NODRIX_HOST + "/v1/telemetry";
-    s_authHeader   = String("Bearer ") + NODRIX_TOKEN;
+#ifdef ENABLE_NODRIX_RELAY_CONTROL
+    pinMode(PIN_RELAY, OUTPUT);
+    digitalWrite(PIN_RELAY, LOW);
+#endif
 
-    // Configurar cliente TLS persistente
-    s_tlsClient.setInsecure(); // Omitir validacion de CA en simulacion/pruebas
-    s_tlsClient.setHandshakeTimeout(TLS_HANDSHAKE_TIMEOUT_S);
+    Nodrix.setDebug(true);
 
-    // Configurar HTTPClient en modo HTTP/1.1 Keep-Alive (reutiliza el socket TLS)
-    s_http.setReuse(true);
-    s_http.useHTTP10(false);
-    s_http.setTimeout(HTTP_TIMEOUT_MS);
-    s_http.setUserAgent("SensoricaESP32/1.0");
+#ifdef NODRIX_CA_CERT
+    Nodrix.setCACert(NODRIX_CA_CERT);
+    Serial.println(F("[Telemetria] TLS: Certificado CA fijado (setCACert)."));
+#else
+    Nodrix.setInsecure();
+    Serial.println(F("[Telemetria] TLS: Modo desarrollo sin verificacion CA (setInsecure)."));
+#endif
+
+    Nodrix.onConnect([]() {
+        Serial.println(F("[Telemetria] Sesion WebSocket Nodrix conectada."));
+    });
+    Nodrix.onDisconnect([]() {
+        Serial.println(F("[Telemetria] Sesion WebSocket Nodrix desconectada."));
+    });
 
     Serial.printf("[Telemetria] Conectando a red WiFi SSID: \"%s\"...\n", WIFI_SSID);
-    Serial.printf("[Telemetria] Endpoint: %s\n", s_telemetryUrl.c_str());
+    Serial.printf("[Telemetria] Host Nodrix: %s\n", NODRIX_HOST);
 
+    // 1. Asociación rápida (optimizada para canal 6 en Wokwi)
     connect_wifi_fast();
 
     if (WiFi.status() == WL_CONNECTED) {
         Serial.printf("[Telemetria] WiFi OK! IP Asignada: %s\n", WiFi.localIP().toString().c_str());
-    } else {
-        Serial.println(F("[Telemetria] Esperando asignacion de red..."));
     }
+
+    // 2. Registrar AP en Nodrix para reconexión autónoma si cae el enlace (nodrix-esp32 skill)
+    Nodrix.addAP(WIFI_SSID, WIFI_PASS);
+
+#ifdef NODRIX_USE_HTTP_POLL
+    Nodrix.beginHTTP(NODRIX_HOST, NODRIX_TOKEN);
+    Serial.println(F("[Telemetria] Modo HTTP Polling inicializado."));
+#else
+    Nodrix.begin(NODRIX_HOST, NODRIX_TOKEN);
+    Serial.println(F("[Telemetria] Modo WebSocket en tiempo real inicializado."));
+#endif
 
     Serial.println(F("==================================================\n"));
 }
 
 void telemetry_run() {
-    if (WiFi.status() != WL_CONNECTED) {
-        unsigned long now = millis();
-        if (now - s_lastWifiRetry >= 5000) {
-            s_lastWifiRetry = now;
-            Serial.println(F("[Telemetria] Reconectando WiFi..."));
-            s_tlsClient.stop();
-            if (strcmp(WIFI_SSID, "Wokwi-GUEST") == 0) {
-                WiFi.begin(WIFI_SSID, WIFI_PASS, 6);
-            } else {
-                WiFi.begin(WIFI_SSID, WIFI_PASS);
-            }
-        }
-    }
+#ifndef NODRIX_USE_HTTP_POLL
+    // Regla 3 de nodrix-esp32: llamar a Nodrix.run() continuamente sin delay()
+    Nodrix.run();
+#endif
 }
 
 bool telemetry_is_connected() {
+#ifdef NODRIX_USE_HTTP_POLL
     return (WiFi.status() == WL_CONNECTED);
+#else
+    return Nodrix.connected();
+#endif
 }
 
 bool telemetry_publish(const SensorData& data) {
-    if (!telemetry_is_connected()) {
-        Serial.println(F("[Telemetria] Alerta: WiFi no disponible, se omitio el envio."));
+    uint8_t staged_count = 0;
+
+    // Regla 1 de nodrix-esp32: nunca enviar valores de relleno si falla una lectura; omitir ese canal
+    if (data.temperatura.valid) {
+        Nodrix.send("temperatura", round2(data.temperatura.value));
+        staged_count++;
+    } else {
+        Serial.println(F("[Telemetria] Alerta: Lectura de 'temperatura' invalida, canal omitido."));
+    }
+
+    if (data.humedad.valid) {
+        Nodrix.send("humedad", round2(data.humedad.value));
+        staged_count++;
+    } else {
+        Serial.println(F("[Telemetria] Alerta: Lectura de 'humedad' invalida, canal omitido."));
+    }
+
+    if (data.iluminacion.valid) {
+        Nodrix.send("iluminacion", round2(data.iluminacion.value));
+        staged_count++;
+    } else {
+        Serial.println(F("[Telemetria] Alerta: Lectura de 'iluminacion' invalida, canal omitido."));
+    }
+
+    if (staged_count == 0) {
+        Serial.println(F("[Telemetria] Error: Ningun canal valido en este ciclo; envio cancelado."));
         return false;
     }
 
-    JsonDocument doc;
-    JsonObject metrics = doc["metrics"].to<JsonObject>();
-    metrics["temperatura"] = round2(data.temperatura.value);
-    metrics["humedad"]     = round2(data.humedad.value);
-    metrics["iluminacion"] = round2(data.iluminacion.value);
-
-    String payload;
-    serializeJson(doc, payload);
-
-    bool reusingTls = s_tlsClient.connected();
-    unsigned long t0 = millis();
-
-    if (!s_http.begin(s_tlsClient, s_telemetryUrl)) {
-        Serial.println(F("[Telemetria] Error: no se pudo inicializar HTTPClient."));
-        s_tlsClient.stop();
-        return false;
-    }
-
-    s_http.addHeader("Authorization", s_authHeader);
-    s_http.addHeader("Content-Type", "application/json");
-
-    int code = s_http.POST(payload);
-    unsigned long dt = millis() - t0;
-
-    // Con setReuse(true), end() limpia la peticion actual pero mantiene abierto el socket TLS
-    s_http.end();
-
-    if (code == 204 || code == 200) {
-        Serial.printf("[Telemetria] OK (HTTP %d en %lu ms | %s)\n",
-                      code,
-                      dt,
-                      reusingTls ? "TLS Keep-Alive reutilizado" : "Nuevo handshake TLS");
-        return true;
-    }
-
-    Serial.printf("[Telemetria] Fallo envio -> HTTP %d (%s) tras %lu ms\n",
-                  code,
-                  s_http.errorToString(code).c_str(),
-                  dt);
-    // Solo cerrar el socket TLS si hubo fallo de transporte (code < 0)
-    if (code < 0) {
-        s_tlsClient.stop();
-    }
-    return false;
+#ifdef NODRIX_USE_HTTP_POLL
+    return Nodrix.poll();
+#else
+    // En modo WebSocket, flush() envía el lote de inmediato si el socket está activo,
+    // o mantiene las lecturas encoladas en el buffer interno hasta que reconecte.
+    Nodrix.flush();
+    return Nodrix.connected();
+#endif
 }

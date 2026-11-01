@@ -12,18 +12,22 @@ constexpr uint8_t PIN_TEMP = 34; // CH0: GPIO34
 constexpr uint8_t PIN_HUM  = 35; // CH1: GPIO35
 constexpr uint8_t PIN_LUX  = 32; // CH2: GPIO32
 
+// Pin de actuador opcional para control remoto (NODRIX_WRITE)
+constexpr uint8_t PIN_RELAY = 2; // LED integrado en ESP32 DevKitC V4
+
 // ==========================================
 // Temporización y Comunicación
 // ==========================================
-constexpr unsigned long TELEMETRY_INTERVAL_MS   = 1000;  // Publicación cada 1 s (modo pruebas cortas)
-constexpr unsigned long SERIAL_BAUD_RATE        = 115200;
-constexpr uint16_t      HTTP_TIMEOUT_MS         = 15000; // Timeout de lectura HTTP (ms)
-constexpr uint32_t      TLS_HANDSHAKE_TIMEOUT_S = 30;    // Timeout de handshake TLS (s)
+#ifndef TELEMETRY_INTERVAL_MS
+constexpr unsigned long TELEMETRY_INTERVAL_MS = 1000; // Publicación cada 1 s (modo demo interactiva)
+#endif
+constexpr unsigned long SERIAL_BAUD_RATE      = 115200;
 
 // ==========================================
 // Rangos Físicos de Escalado (ADC 12-bit: 0-4095)
 // ==========================================
-constexpr float ADC_MAX_VAL = 4095.0f;
+constexpr uint16_t ADC_RAW_MAX = 4095;
+constexpr float    ADC_MAX_VAL = 4095.0f;
 
 // Temperatura: 0 - 100 °C
 constexpr float TEMP_MIN = 0.0f;
