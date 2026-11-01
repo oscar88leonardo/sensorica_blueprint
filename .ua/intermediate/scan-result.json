@@ -1,0 +1,146 @@
+{
+  "name": "sensorica_blueprint",
+  "description": "End-to-end sensing, digitization, and IoT telemetry architecture for ESP32 with PlatformIO, Wokwi simulation, and Cloudflare/Nodrix integration.",
+  "languages": [
+    "c",
+    "cpp",
+    "json",
+    "markdown",
+    "toml"
+  ],
+  "frameworks": [
+    "Arduino",
+    "PlatformIO",
+    "ESP32",
+    "Nodrix",
+    "ArduinoJson"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 152,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "dashboard/README.md",
+      "language": "markdown",
+      "sizeLines": 42,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "dashboard/monitoreo_sensores.json",
+      "language": "json",
+      "sizeLines": 129,
+      "fileCategory": "config"
+    },
+    {
+      "path": "docs/acondicionamiento.md",
+      "language": "markdown",
+      "sizeLines": 85,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/implementation_plan.md",
+      "language": "markdown",
+      "sizeLines": 199,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/plan.md",
+      "language": "markdown",
+      "sizeLines": 199,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "firmware/diagram.json",
+      "language": "json",
+      "sizeLines": 127,
+      "fileCategory": "config"
+    },
+    {
+      "path": "firmware/include/config.h",
+      "language": "c",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/include/secrets.h.example",
+      "language": "example",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/platformio.ini",
+      "language": "config",
+      "sizeLines": 10,
+      "fileCategory": "config"
+    },
+    {
+      "path": "firmware/src/main.cpp",
+      "language": "cpp",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/src/sensors.cpp",
+      "language": "cpp",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/src/sensors.h",
+      "language": "c",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/src/telemetry.cpp",
+      "language": "cpp",
+      "sizeLines": 160,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/src/telemetry.h",
+      "language": "c",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/wokwi.toml",
+      "language": "toml",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    }
+  ],
+  "totalFiles": 16,
+  "filteredByIgnore": 0,
+  "estimatedComplexity": "small",
+  "importMap": {
+    "README.md": [],
+    "dashboard/README.md": [],
+    "dashboard/monitoreo_sensores.json": [],
+    "docs/acondicionamiento.md": [],
+    "docs/implementation_plan.md": [],
+    "docs/plan.md": [],
+    "firmware/diagram.json": [],
+    "firmware/include/config.h": [],
+    "firmware/include/secrets.h.example": [],
+    "firmware/platformio.ini": [],
+    "firmware/src/main.cpp": [
+      "firmware/src/sensors.h",
+      "firmware/src/telemetry.h"
+    ],
+    "firmware/src/sensors.cpp": [
+      "firmware/src/sensors.h"
+    ],
+    "firmware/src/sensors.h": [],
+    "firmware/src/telemetry.cpp": [
+      "firmware/src/telemetry.h"
+    ],
+    "firmware/src/telemetry.h": [
+      "firmware/src/sensors.h"
+    ],
+    "firmware/wokwi.toml": []
+  }
+}

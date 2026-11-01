@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 16,
+  "totalBatches": 4,
+  "exportsByPath": {
+    "firmware/include/config.h": [],
+    "firmware/include/secrets.h.example": [],
+    "firmware/src/main.cpp": [
+      "setup",
+      "loop"
+    ],
+    "firmware/src/sensors.cpp": [
+      "sensors_init",
+      "sensors_read"
+    ],
+    "firmware/src/sensors.h": [
+      "SensorReading",
+      "SensorData"
+    ],
+    "firmware/src/telemetry.cpp": [
+      "telemetry_init",
+      "telemetry_run",
+      "telemetry_is_connected",
+      "telemetry_publish"
+    ],
+    "firmware/src/telemetry.h": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "firmware/src/main.cpp",
+          "language": "cpp",
+          "sizeLines": 53,
+          "fileCategory": "code"
+        },
+        {
+          "path": "firmware/src/telemetry.cpp",
+          "language": "cpp",
+          "sizeLines": 160,
+          "fileCategory": "code"
+        },
+        {
+          "path": "firmware/src/telemetry.h",
+          "language": "c",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "firmware/src/main.cpp": [
+          "firmware/src/sensors.h",
+          "firmware/src/telemetry.h"
+        ],
+        "firmware/src/telemetry.cpp": [
+          "firmware/src/telemetry.h"
+        ],
+        "firmware/src/telemetry.h": [
+          "firmware/src/sensors.h"
+        ]
+      },
+      "neighborMap": {
+        "firmware/src/main.cpp": [
+          {
+            "path": "firmware/src/sensors.h",
+            "batchIndex": 4,
+            "symbols": [
+              "SensorReading",
+              "SensorData"
+            ]
+          }
+        ],
+        "firmware/src/telemetry.h": [
+          {
+            "path": "firmware/src/sensors.h",
+            "batchIndex": 4,
+            "symbols": [
+              "SensorReading",
+              "SensorData"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "docs/acondicionamiento.md",
+          "language": "markdown",
+          "sizeLines": 85,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/implementation_plan.md",
+          "language": "markdown",
+          "sizeLines": 199,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/plan.md",
+          "language": "markdown",
+          "sizeLines": 199,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "docs/acondicionamiento.md": [],
+        "docs/implementation_plan.md": [],
+        "docs/plan.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": "firmware/diagram.json",
+          "language": "json",
+          "sizeLines": 127,
+          "fileCategory": "config"
+        },
+        {
+          "path": "firmware/platformio.ini",
+          "language": "config",
+          "sizeLines": 10,
+          "fileCategory": "config"
+        },
+        {
+          "path": "firmware/wokwi.toml",
+          "language": "toml",
+          "sizeLines": 4,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "firmware/diagram.json": [],
+        "firmware/platformio.ini": [],
+        "firmware/wokwi.toml": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 4,
+      "files": [
+        {
+          "path": "README.md",
+          "language": "markdown",
+          "sizeLines": 152,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "dashboard/README.md",
+          "language": "markdown",
+          "sizeLines": 42,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "dashboard/monitoreo_sensores.json",
+          "language": "json",
+          "sizeLines": 129,
+          "fileCategory": "config"
+        },
+        {
+          "path": "firmware/include/config.h",
+          "language": "c",
+          "sizeLines": 38,
+          "fileCategory": "code"
+        },
+        {
+          "path": "firmware/include/secrets.h.example",
+          "language": "example",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "firmware/src/sensors.cpp",
+          "language": "cpp",
+          "sizeLines": 30,
+          "fileCategory": "code"
+        },
+        {
+          "path": "firmware/src/sensors.h",
+          "language": "c",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "README.md": [],
+        "dashboard/README.md": [],
+        "dashboard/monitoreo_sensores.json": [],
+        "firmware/include/config.h": [],
+        "firmware/include/secrets.h.example": [],
+        "firmware/src/sensors.cpp": [
+          "firmware/src/sensors.h"
+        ],
+        "firmware/src/sensors.h": []
+      },
+      "neighborMap": {
+        "firmware/src/sensors.h": [
+          {
+            "path": "firmware/src/main.cpp",
+            "batchIndex": 1,
+            "symbols": [
+              "setup",
+              "loop"
+            ]
+          },
+          {
+            "path": "firmware/src/telemetry.h",
+            "batchIndex": 1,
+            "symbols": []
+          }
+        ]
+      }
+    }
+  ]
+}

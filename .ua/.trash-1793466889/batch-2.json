@@ -1,0 +1,73 @@
+{
+  "nodes": [
+    {
+      "id": "document:docs/acondicionamiento.md",
+      "type": "document",
+      "name": "acondicionamiento.md",
+      "filePath": "docs/acondicionamiento.md",
+      "summary": "Technical documentation explaining sensor signal conditioning, ESP32 ADC1 constraints, virtual potentiometer simulation in Wokwi, and analog front-end design for real sensors.",
+      "tags": [
+        "documentation",
+        "sensor-conditioning",
+        "adc",
+        "hardware-design",
+        "simulation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/implementation_plan.md",
+      "type": "document",
+      "name": "implementation_plan.md",
+      "filePath": "docs/implementation_plan.md",
+      "summary": "Step-by-step implementation guide covering Wokwi simulation, ESP32 firmware acquisition, Cloudflare Nodrix backend deployment, and MCP-driven telemetry dashboard setup.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "roadmap",
+        "telemetry",
+        "dashboard"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/plan.md",
+      "type": "document",
+      "name": "plan.md",
+      "filePath": "docs/plan.md",
+      "summary": "Master project plan describing architecture decisions, hardware/simulation configurations, and milestone verification from sensor acquisition to cloud dashboard.",
+      "tags": [
+        "documentation",
+        "planning",
+        "architecture",
+        "milestones",
+        "iot"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/implementation_plan.md",
+      "target": "document:docs/acondicionamiento.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/plan.md",
+      "target": "document:docs/acondicionamiento.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/plan.md",
+      "target": "document:docs/implementation_plan.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}
+

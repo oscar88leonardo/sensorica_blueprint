@@ -1,0 +1,168 @@
+{
+  "nodes": [
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Comprehensive architectural overview and guide covering sensor signal acquisition, ESP32 ADC1 digitization, Wokwi simulation, and real-time Cloudflare/Nodrix IoT telemetry.",
+      "tags": ["documentation", "entry-point", "architecture", "overview"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:dashboard/README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "dashboard/README.md",
+      "summary": "Documentation for the sensor monitoring dashboard in Nodrix, detailing its 16-column grid layout, widget inventory, and variable mapping.",
+      "tags": ["documentation", "dashboard", "iot", "monitoring"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:dashboard/monitoreo_sensores.json",
+      "type": "config",
+      "name": "monitoreo_sensores.json",
+      "filePath": "dashboard/monitoreo_sensores.json",
+      "summary": "Exported Nodrix dashboard configuration specifying widget layouts for instantaneous values, analog gauges, and historical telemetry charts.",
+      "tags": ["configuration", "dashboard", "widgets", "telemetry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:firmware/include/config.h",
+      "type": "file",
+      "name": "config.h",
+      "filePath": "firmware/include/config.h",
+      "summary": "Firmware configuration header defining ESP32 ADC1 pins, telemetry timing, baud rates, HTTP/TLS timeouts, and physical sensor scaling boundaries.",
+      "tags": ["configuration", "firmware", "hardware", "adc"],
+      "complexity": "simple",
+      "languageNotes": "Uses C++ constexpr for compile-time hardware pin definitions and scaling parameters."
+    },
+    {
+      "id": "file:firmware/include/secrets.h.example",
+      "type": "file",
+      "name": "secrets.h.example",
+      "filePath": "firmware/include/secrets.h.example",
+      "summary": "Template configuration file defining placeholders for WiFi network credentials, Nodrix Cloudflare Worker hostname, and project authentication tokens.",
+      "tags": ["configuration", "secrets", "template", "security"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:firmware/src/sensors.cpp",
+      "type": "file",
+      "name": "sensors.cpp",
+      "filePath": "firmware/src/sensors.cpp",
+      "summary": "Implements ADC initialization and physical magnitude calculation from ESP32 12-bit ADC readings.",
+      "tags": ["firmware", "sensors", "adc", "signal-processing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:firmware/src/sensors.cpp:sensors_init",
+      "type": "function",
+      "name": "sensors_init",
+      "filePath": "firmware/src/sensors.cpp",
+      "lineRange": [4, 13],
+      "summary": "Configures ESP32 ADC1 resolution to 12 bits, attenuation to 11 dB, and sets up GPIO input pins for sensor channels.",
+      "tags": ["initialization", "hardware", "adc", "gpio"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:firmware/src/sensors.cpp:sensors_read",
+      "type": "function",
+      "name": "sensors_read",
+      "filePath": "firmware/src/sensors.cpp",
+      "lineRange": [15, 30],
+      "summary": "Reads raw 12-bit values from ADC1 channels and applies linear interpolation formulas to return structured SensorData.",
+      "tags": ["sensing", "adc", "conversion", "data-acquisition"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:firmware/src/sensors.h",
+      "type": "file",
+      "name": "sensors.h",
+      "filePath": "firmware/src/sensors.h",
+      "summary": "Header declaring sensor data structures (SensorReading, SensorData) and function prototypes for ADC setup and sampling.",
+      "tags": ["header", "data-model", "sensors", "type-definition"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "file:firmware/src/sensors.h",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:sensors_init",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:sensors_read",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:sensors_init",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "function:firmware/src/sensors.cpp:sensors_read",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:firmware/src/sensors.cpp",
+      "target": "file:firmware/include/config.h",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:dashboard/README.md",
+      "target": "config:dashboard/monitoreo_sensores.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:firmware/include/config.h",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:dashboard/monitoreo_sensores.json",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:firmware/src/sensors.cpp",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "document:dashboard/README.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}
+

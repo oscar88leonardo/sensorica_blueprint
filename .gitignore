@@ -19,3 +19,7 @@ firmware/include/secrets.h
 *.swp
 *~
 .DS_Store
+
+# Agents Setup
+.agents/
+

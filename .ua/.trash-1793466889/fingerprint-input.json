@@ -1,0 +1,22 @@
+{
+  "projectRoot": "/home/leonard0/eCodes/sensorica_blueprint",
+  "filePaths": [
+    "README.md",
+    "dashboard/README.md",
+    "dashboard/monitoreo_sensores.json",
+    "docs/acondicionamiento.md",
+    "docs/implementation_plan.md",
+    "docs/plan.md",
+    "firmware/diagram.json",
+    "firmware/include/config.h",
+    "firmware/include/secrets.h.example",
+    "firmware/platformio.ini",
+    "firmware/src/main.cpp",
+    "firmware/src/sensors.cpp",
+    "firmware/src/sensors.h",
+    "firmware/src/telemetry.cpp",
+    "firmware/src/telemetry.h",
+    "firmware/wokwi.toml"
+  ],
+  "gitCommitHash": "a5f0b1ab39b701dcadd7793a6057abfc8165c69a"
+}

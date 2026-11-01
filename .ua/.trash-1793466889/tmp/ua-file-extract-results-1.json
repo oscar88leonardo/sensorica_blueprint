@@ -1,0 +1,667 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 3,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "firmware/src/main.cpp",
+      "language": "cpp",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 40,
+      "functions": [
+        {
+          "name": "setup",
+          "startLine": 8,
+          "endLine": 27,
+          "params": []
+        },
+        {
+          "name": "loop",
+          "startLine": 29,
+          "endLine": 53,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "setup",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "loop",
+          "line": 29,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setup",
+          "callee": "begin",
+          "lineNumber": 9
+        },
+        {
+          "caller": "setup",
+          "callee": "millis",
+          "lineNumber": 10
+        },
+        {
+          "caller": "setup",
+          "callee": "println",
+          "lineNumber": 14
+        },
+        {
+          "caller": "setup",
+          "callee": "println",
+          "lineNumber": 15
+        },
+        {
+          "caller": "setup",
+          "callee": "F",
+          "lineNumber": 15
+        },
+        {
+          "caller": "setup",
+          "callee": "println",
+          "lineNumber": 16
+        },
+        {
+          "caller": "setup",
+          "callee": "F",
+          "lineNumber": 16
+        },
+        {
+          "caller": "setup",
+          "callee": "println",
+          "lineNumber": 17
+        },
+        {
+          "caller": "setup",
+          "callee": "F",
+          "lineNumber": 17
+        },
+        {
+          "caller": "setup",
+          "callee": "sensors_init",
+          "lineNumber": 20
+        },
+        {
+          "caller": "setup",
+          "callee": "println",
+          "lineNumber": 21
+        },
+        {
+          "caller": "setup",
+          "callee": "F",
+          "lineNumber": 21
+        },
+        {
+          "caller": "setup",
+          "callee": "telemetry_init",
+          "lineNumber": 24
+        },
+        {
+          "caller": "setup",
+          "callee": "printf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "loop",
+          "callee": "telemetry_run",
+          "lineNumber": 31
+        },
+        {
+          "caller": "loop",
+          "callee": "millis",
+          "lineNumber": 33
+        },
+        {
+          "caller": "loop",
+          "callee": "sensors_read",
+          "lineNumber": 40
+        },
+        {
+          "caller": "loop",
+          "callee": "printf",
+          "lineNumber": 43
+        },
+        {
+          "caller": "loop",
+          "callee": "printf",
+          "lineNumber": 44
+        },
+        {
+          "caller": "loop",
+          "callee": "printf",
+          "lineNumber": 45
+        },
+        {
+          "caller": "loop",
+          "callee": "printf",
+          "lineNumber": 46
+        },
+        {
+          "caller": "loop",
+          "callee": "telemetry_publish",
+          "lineNumber": 49
+        },
+        {
+          "caller": "loop",
+          "callee": "delay",
+          "lineNumber": 52
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "firmware/src/telemetry.cpp",
+      "language": "cpp",
+      "fileCategory": "code",
+      "totalLines": 160,
+      "nonEmptyLines": 132,
+      "functions": [
+        {
+          "name": "round2",
+          "startLine": 25,
+          "endLine": 27,
+          "params": [
+            "val"
+          ]
+        },
+        {
+          "name": "connect_wifi_fast",
+          "startLine": 29,
+          "endLine": 55,
+          "params": []
+        },
+        {
+          "name": "telemetry_init",
+          "startLine": 57,
+          "endLine": 88,
+          "params": []
+        },
+        {
+          "name": "telemetry_run",
+          "startLine": 90,
+          "endLine": 104,
+          "params": []
+        },
+        {
+          "name": "telemetry_is_connected",
+          "startLine": 106,
+          "endLine": 108,
+          "params": []
+        },
+        {
+          "name": "telemetry_publish",
+          "startLine": 110,
+          "endLine": 160,
+          "params": [
+            "data"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "telemetry_init",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "telemetry_run",
+          "line": 90,
+          "isDefault": false
+        },
+        {
+          "name": "telemetry_is_connected",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "telemetry_publish",
+          "line": 110,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "round2",
+          "callee": "roundf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "status",
+          "lineNumber": 30
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "mode",
+          "lineNumber": 32
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "setSleep",
+          "lineNumber": 33
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "strcmp",
+          "lineNumber": 36
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "begin",
+          "lineNumber": 37
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "millis",
+          "lineNumber": 38
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "status",
+          "lineNumber": 39
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "millis",
+          "lineNumber": 39
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "delay",
+          "lineNumber": 40
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "print",
+          "lineNumber": 41
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "status",
+          "lineNumber": 46
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "begin",
+          "lineNumber": 47
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "millis",
+          "lineNumber": 48
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "status",
+          "lineNumber": 49
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "millis",
+          "lineNumber": 49
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "delay",
+          "lineNumber": 50
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "print",
+          "lineNumber": 51
+        },
+        {
+          "caller": "connect_wifi_fast",
+          "callee": "println",
+          "lineNumber": 54
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "println",
+          "lineNumber": 58
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "println",
+          "lineNumber": 59
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "F",
+          "lineNumber": 59
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "println",
+          "lineNumber": 60
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "F",
+          "lineNumber": 60
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "println",
+          "lineNumber": 61
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "F",
+          "lineNumber": 61
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "String",
+          "lineNumber": 63
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "String",
+          "lineNumber": 64
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "setInsecure",
+          "lineNumber": 67
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "setHandshakeTimeout",
+          "lineNumber": 68
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "setReuse",
+          "lineNumber": 71
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "useHTTP10",
+          "lineNumber": 72
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "setTimeout",
+          "lineNumber": 73
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "setUserAgent",
+          "lineNumber": 74
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "printf",
+          "lineNumber": 76
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "printf",
+          "lineNumber": 77
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "c_str",
+          "lineNumber": 77
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "connect_wifi_fast",
+          "lineNumber": 79
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "status",
+          "lineNumber": 81
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "printf",
+          "lineNumber": 82
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "c_str",
+          "lineNumber": 82
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "toString",
+          "lineNumber": 82
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "localIP",
+          "lineNumber": 82
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "println",
+          "lineNumber": 84
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "F",
+          "lineNumber": 84
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "println",
+          "lineNumber": 87
+        },
+        {
+          "caller": "telemetry_init",
+          "callee": "F",
+          "lineNumber": 87
+        },
+        {
+          "caller": "telemetry_run",
+          "callee": "status",
+          "lineNumber": 91
+        },
+        {
+          "caller": "telemetry_run",
+          "callee": "millis",
+          "lineNumber": 92
+        },
+        {
+          "caller": "telemetry_run",
+          "callee": "println",
+          "lineNumber": 95
+        },
+        {
+          "caller": "telemetry_run",
+          "callee": "F",
+          "lineNumber": 95
+        },
+        {
+          "caller": "telemetry_run",
+          "callee": "stop",
+          "lineNumber": 96
+        },
+        {
+          "caller": "telemetry_run",
+          "callee": "strcmp",
+          "lineNumber": 97
+        },
+        {
+          "caller": "telemetry_run",
+          "callee": "begin",
+          "lineNumber": 98
+        },
+        {
+          "caller": "telemetry_run",
+          "callee": "begin",
+          "lineNumber": 100
+        },
+        {
+          "caller": "telemetry_is_connected",
+          "callee": "status",
+          "lineNumber": 107
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "telemetry_is_connected",
+          "lineNumber": 111
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "println",
+          "lineNumber": 112
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "F",
+          "lineNumber": 112
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "to<JsonObject>",
+          "lineNumber": 117
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "round2",
+          "lineNumber": 118
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "round2",
+          "lineNumber": 119
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "round2",
+          "lineNumber": 120
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "serializeJson",
+          "lineNumber": 123
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "connected",
+          "lineNumber": 125
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "millis",
+          "lineNumber": 126
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "begin",
+          "lineNumber": 128
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "println",
+          "lineNumber": 129
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "F",
+          "lineNumber": 129
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "stop",
+          "lineNumber": 130
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "addHeader",
+          "lineNumber": 134
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "addHeader",
+          "lineNumber": 135
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "POST",
+          "lineNumber": 137
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "millis",
+          "lineNumber": 138
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "end",
+          "lineNumber": 141
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "printf",
+          "lineNumber": 144
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "printf",
+          "lineNumber": 151
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "c_str",
+          "lineNumber": 153
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "errorToString",
+          "lineNumber": 153
+        },
+        {
+          "caller": "telemetry_publish",
+          "callee": "stop",
+          "lineNumber": 157
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "firmware/src/telemetry.h",
+      "language": "c",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "projectRoot": "/home/leonard0/eCodes/sensorica_blueprint",
+  "batchFiles": [
+    {
+      "path": "firmware/src/main.cpp",
+      "language": "cpp",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/src/telemetry.cpp",
+      "language": "cpp",
+      "sizeLines": 160,
+      "fileCategory": "code"
+    },
+    {
+      "path": "firmware/src/telemetry.h",
+      "language": "c",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "firmware/src/main.cpp": [
+      "firmware/src/sensors.h",
+      "firmware/src/telemetry.h"
+    ],
+    "firmware/src/telemetry.cpp": [
+      "firmware/src/telemetry.h"
+    ],
+    "firmware/src/telemetry.h": [
+      "firmware/src/sensors.h"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "scriptCompleted": true,
+  "stats": {
+    "filesScanned": 16,
+    "filesWithImports": 4,
+    "totalEdges": 5
+  },
+  "failures": [],
+  "importMap": {
+    "README.md": [],
+    "dashboard/README.md": [],
+    "dashboard/monitoreo_sensores.json": [],
+    "docs/acondicionamiento.md": [],
+    "docs/implementation_plan.md": [],
+    "docs/plan.md": [],
+    "firmware/diagram.json": [],
+    "firmware/include/config.h": [],
+    "firmware/include/secrets.h.example": [],
+    "firmware/platformio.ini": [],
+    "firmware/src/main.cpp": [
+      "firmware/src/sensors.h",
+      "firmware/src/telemetry.h"
+    ],
+    "firmware/src/sensors.cpp": [
+      "firmware/src/sensors.h"
+    ],
+    "firmware/src/sensors.h": [],
+    "firmware/src/telemetry.cpp": [
+      "firmware/src/telemetry.h"
+    ],
+    "firmware/src/telemetry.h": [
+      "firmware/src/sensors.h"
+    ],
+    "firmware/wokwi.toml": []
+  }
+}
