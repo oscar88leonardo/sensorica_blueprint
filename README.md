@@ -99,13 +99,25 @@ Edita `firmware/include/secrets.h` con los datos de tu entorno:
 #define NODRIX_HOST  "tu-instancia.workers.dev"          // Host de tu Worker en Cloudflare (sin https:// ni /)
 #define NODRIX_TOKEN "pega_aqui_tu_project_token"        // Token del proyecto generado en Nodrix
 
+
 // (Opcional - Solo producción en hardware físico)
 // #define NODRIX_CA_CERT "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n"
 ```
-
 > **Nota sobre Seguridad TLS (`NODRIX_CA_CERT` vs `setInsecure`):**
 > - **En simulación (Wokwi) y prototipado:** Si `NODRIX_CA_CERT` no está definido, el firmware invoca `Nodrix.setInsecure()`. El tráfico sigue viajando **cifrado mediante TLS**, pero se omite la verificación de la cadena X.509 de la Autoridad Certificadora (CA). Esto evita fallos por falta de sincronización de reloj NTP al arranque (`1970-01-01`), reduce la carga de cómputo en el simulador y tolera la rotación automática de certificados de borde en Cloudflare.
-> - **En producción (ESP32 físico):** Para proteger el `NODRIX_TOKEN` frente a ataques *Man-in-the-Middle (MITM)* en redes WiFi reales, define `NODRIX_CA_CERT` en `secrets.h` con el certificado PEM de la Root CA que firma tu dominio en Cloudflare (por ejemplo, `ISRG Root X1` o `GTS Root R1`, consultable con `openssl s_client -showcerts -connect <tu-instancia>.workers.dev:443 </dev/null`). Al detectarlo, [`telemetry_init()`](firmware/src/telemetry.cpp) activará automáticamente `Nodrix.setCACert(NODRIX_CA_CERT)`.
+> - **En producción (ESP32 físico):** Para proteger el `NODRIX_TOKEN` frente a ataques *Man-in-the-Middle (MITM)* en redes WiFi reales, define `NODRIX_CA_CERT` en `secrets.h` con el certificado PEM de la Root CA que firma tu dominio en Cloudflare. Al detectarlo, [`telemetry_init()`](firmware/src/telemetry.cpp) activará automáticamente `Nodrix.setCACert(NODRIX_CA_CERT)`.
+
+## How to get the Root CA  Certificate
+openssl s_client -showcerts -servername yourproject.workers.dev \
+-connect yourproject.workers.dev:443 </dev/null 2>/dev/null \
+| awk '/BEGIN CERTIFICATE/{c++; b=""} {b=b $0 ORS} /END CERTIFICATE/{last=b} END{printf "\n%s", last}'
+
+
+Lectura sobre TLS: https://cityhost.ua/en/blog/scho-take-protokol-tls-yak-vin-pracyu-ta-vid-chogo-zahischa.html
+
+Nodrix CA Cert:
+https://components.espressif.com/components/decoded-cipher/nodrix/versions/0.1.0/readme
+
 
 *(Opcional)* En [`firmware/include/config.h`](firmware/include/config.h) puedes ajustar `TELEMETRY_INTERVAL_MS` según tu caso de uso (por ejemplo `1000` ms para pruebas cortas interactivas o `10000` ms para operación continua cuidando la cuota gratuita de Cloudflare).
 
@@ -125,7 +137,6 @@ pio run -d firmware
 2. Presiona el botón **Play** de Wokwi (o ejecuta `F1` → `Wokwi: Start Simulator`).
 3. Comprueba en el Monitor Serie la conexión a `Wokwi-GUEST` y las confirmaciones `HTTP 204` (`TLS Keep-Alive reutilizado`) al mover los 3 potenciómetros.
 
-> **Recomendación de rendimiento:** En equipos con 8 GB de RAM o menos, se recomienda mantener el navegador cerrado en el PC (dejando visible la pestaña de Wokwi en primer plano) y visualizar el dashboard en tiempo real desde otro dispositivo (celular o tablet) para evitar *throttling* del simulador y saturación de memoria.
 
 ### 5. Configurar o visualizar el Dashboard en Nodrix
 
@@ -139,7 +150,7 @@ pio run -d firmware
 1. Abre el archivo [`firmware/diagram.json`](firmware/diagram.json) en el IDE.
 2. Inicia la simulación presionando el botón de **Play** de la extensión de Wokwi (o comando `Wokwi: Start Simulator`).
 3. El firmware cargará automáticamente el binario compilado en `.pio/build/esp32dev/firmware.bin`.
-4. El ESP32 se conecta a la red `Wokwi-GUEST` y a la instancia de Nodrix en Cloudflare mediante una sesión `HTTPS Keep-Alive` persistente.
+4. El ESP32 se conecta a la red `Wokwi-GUEST` y a la instancia de Nodrix en Cloudflare 
 5. En cada ciclo (`TELEMETRY_INTERVAL_MS`), el firmware lee los 3 potenciómetros y envía el lote de métricas (`temperatura`, `humedad`, `iluminacion`) hacia `POST /v1/telemetry`, confirmando con respuesta HTTP `204`.
 
 ---
